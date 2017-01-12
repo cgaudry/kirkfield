@@ -5,8 +5,10 @@ import {MainLayout} from './layouts/MainLayout.jsx';
 import Reporting from './Reporting.jsx';
 import InventoryInputWrapper from './inventoryView/InventoryInputWrapper.jsx';
 import InventorySearchWrapper from './inventoryView/InventorySearchWrapper.jsx';
-
 import InventoryDetail from './inventoryView/InventoryDetail.jsx';
+
+import JobInputWrapper from './jobView/JobInputWrapper.jsx';
+
 import HomePage from './HomePage.jsx';
 
 
@@ -47,7 +49,7 @@ FlowRouter.route('/inventory/:id', {
 FlowRouter.route('/reporting', {
 	action() {
 		mount(MainLayout, {
-			content: (<Reporting />),
+			content: (<JobInputWrapper />),
 		})
 	}
 })

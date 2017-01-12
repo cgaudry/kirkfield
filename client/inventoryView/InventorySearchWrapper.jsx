@@ -4,7 +4,7 @@ import TrackerReact from 'meteor/ultimatejs:tracker-react';
 
 import InventoryForm from './InventoryForm.jsx';
 import InventorySingle from './InventorySingle.jsx';
-//import InventoryList from './InventoryList.jsx';
+
 
 
 

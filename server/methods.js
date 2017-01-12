@@ -44,4 +44,20 @@ Meteor.methods({
 		}
 		Inventory.remove(inventoryItem._id)
 	},
+
+	addJob(jobId, jobName, jobQuantity) {
+		if(!Meteor.userId()) {
+			throw new Meteor.Error('Not authorized')
+		}
+		
+			Jobs.insert({
+				jobId: jobId,
+				jobName: jobName,
+				jobQuantity: parseInt(jobQuantity),
+				complete: false,
+				createdAt: new Date(),
+				user: Meteor.userId()
+			})
+		
+	}
 });
