@@ -45,15 +45,28 @@ Meteor.methods({
 		Inventory.remove(inventoryItem._id)
 	},
 
-	addJob(jobId, jobName, jobQuantity) {
+	addJob(invoice, firstName, lastName, address, phoneNumber, email, jobTypeCode,
+			estimateCost, estimateParts, estimateEmployee, installCost, installParts, installEmployee, vehicleId, mileage) {
 		if(!Meteor.userId()) {
 			throw new Meteor.Error('Not authorized')
 		}
 		
 			Jobs.insert({
-				jobId: jobId,
-				jobName: jobName,
-				jobQuantity: parseInt(jobQuantity),
+				invoice: invoice,
+				firstName: firstName,
+				lastName: parseInt(lastName),
+				address: address,
+				phoneNumber: parseInt(phoneNumber),
+				email: email,
+				jobTypeCode: jobTypeCode,
+				estimateCost: parseInt(estimateCost),
+				estimateParts: estimateParts,
+				estimateEmployee: estimateEmployee,
+				installCost: parseInt(installCost),
+				installParts: installParts,
+				installEmployee: installEmployee,
+				vehicleId: vehicleId,
+				mileage: parseInt(mileage),
 				complete: false,
 				createdAt: new Date(),
 				user: Meteor.userId()
