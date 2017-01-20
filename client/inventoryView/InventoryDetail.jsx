@@ -29,9 +29,20 @@ export default class InventoryDetail extends TrackerReact(Component) {
 			return(<div>Loading...</div>)
 		}
 		return(
-			<div>
-				<h1>Item Details</h1>
-				<h2>{item.inventoryItemName}</h2>
+			<div className="panel panel-primary">
+				<div className="panel-heading">
+					<h1>Item Details: {item.inventoryItemName}</h1>
+				</div>
+				<div className="panel-body">
+					<ul className="list-group">
+						<li className="list-group-item">
+							Item Id: {item.inventoryItemId}
+						</li>
+						<li className="list-group-item">
+							Item Quantity: {item.inventoryItemQuantity}
+						</li>
+					</ul>
+				</div>
 			</div>
 			)
 	}

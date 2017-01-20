@@ -19,10 +19,9 @@ export const MainLayout = ({content}) => (
 							<li><a href="/inventorySearch">InventorySearch</a></li>
 						</ul>
 					</li>
+					<li><a href="/reporting">Reporting</a></li>
+					<li><AccountsUI /></li>
 				</ul>
-				<a href="/reporting">Reporting</a>
-				<AccountsUI />
-				
 			</div>
 		</nav>
 	</header>
