@@ -2,11 +2,11 @@ import React from 'react';
 import AccountsUI from '../AccountsUI.jsx';
 
 export const MainLayout = ({content}) => (
-	<div className="main-layout">
+	<div className="container">
 	<header>
 		<h2>Kirkfield Web Portal</h2>
 		<nav className="navbar navbar-default">
-			<div className="container fluid">
+			<div>
 				<div className="navbar-header">
 				<a className="navbar-brand" href="#">Kirkfield</a>
 				</div>
@@ -27,7 +27,7 @@ export const MainLayout = ({content}) => (
 		</nav>
 	</header>
 	<main>
-		<div className="container">
+		<div>
 			{content}
 		</div>
 	</main>

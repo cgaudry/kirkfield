@@ -56,23 +56,47 @@ export default class InventorySearchWrapper extends TrackerReact(React.Component
 		
 		return(
 			<div>
-				<h1>Search Inventory Items</h1>
+				<div className="panel panel-primary">
+				<div className="panel-heading">
+					<h1>Search Inventory Items</h1>
+				</div>
+				<div className="panel-body">
 				<form 
-				className="new-resolution" 
+				className="form-horizontal" 
 				onSubmit={this.updateState.bind(this)}>
+					<div className="form-group">
+					<label className="control-label col-sm-2" htmlFor="searchTerm">Search Term:
+					</label>
+					<div className="col-sm-10">
 					<input 
-						type="text" 
+						type="text"
+						id="searchTerm"
 						ref="query"
 						placeholder="Search Term"
+						className="form-control"
 					/>
-					<input type="submit" />
+					</div>
+					</div>
+					<input type="submit" className="btn btn-primary pull-right"/>
 				</form>
-				<ul className="resolutions">
-				{this.inventoryItems().map( (inventoryItems) => {
-					return <InventorySingle key={inventoryItems._id} inventoryItem={inventoryItems} />
-				})}
-			</ul>
+				</div>
 				
+				<h4>Search Results</h4>
+				<table className="table">
+					<thead>
+						<tr>
+							<td>Item Id</td>
+							<td>Item Name</td>
+							<td>Item Quantity</td>
+						</tr>
+					</thead>
+					<tbody>
+					{this.inventoryItems().map( (inventoryItems) => {
+						return <InventorySingle key={inventoryItems._id} inventoryItem={inventoryItems} />
+					})}
+					</tbody>
+				</table>
+				</div>
 			</div>
 
 		)
