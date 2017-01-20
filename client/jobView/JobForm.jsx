@@ -52,22 +52,42 @@ export default class JobForm extends Component {
 	
 	render() {
 		return(
-			<form className="new-resolution" onSubmit={this.addJob.bind(this)}>
+			<form className="form-horizontal" onSubmit={this.addJob.bind(this)}>
+				<div className="form-group">
+					<label className="control-label col-sm-2" htmlFor="invoiceNumber">Invoice Number:</label>
+					<div className="col-sm-10">
 					<input 
 						type="number" 
+						className="form-control"
+						id="invoiceNumber"
 						ref="invoice"
 						placeholder="Invoice"
 					/>
+					</div>
+				</div>
+				<div className="form-group">
+					<label className="control-label col-sm-2" htmlFor="firstName">First Name:</label>
+					<div className="col-sm-4">
 					<input 
 						type="text" 
+						className="form-control"
+						id="firstName"
 						ref="firstName"
 						placeholder="First Name"
 					/>
+					</div>
+				
+					<label className="control-label col-sm-2" htmlFor="lastName">Last Name:</label>
+					<div className="col-sm-4">
 					<input 
 						type="text" 
+						className="form-control"
+						id="lastName"
 						ref="lastName"
 						placeholder="Last Name"
 					/>
+					</div>
+				</div>
 					<input 
 						type="text" 
 						ref="address"

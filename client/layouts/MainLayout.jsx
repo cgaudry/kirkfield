@@ -15,8 +15,15 @@ export const MainLayout = ({content}) => (
 						<a className="dropdown-toggle" data-toggle="dropdown" href="#">Inventory
 						<span className="caret"></span></a>
 						<ul className="dropdown-menu">
-							<li><a href="/inventoryInput">InventoryInput</a></li>
-							<li><a href="/inventorySearch">InventorySearch</a></li>
+							<li><a href="/inventoryInput">Inventory Input</a></li>
+							<li><a href="/inventorySearch">Inventory Search</a></li>
+						</ul>
+					</li>
+					<li className="dropdown">
+						<a className="dropdown-toggle" data-toggle="dropdown" href="#">Jobs
+						<span className="caret"></span></a>
+						<ul className="dropdown-menu">
+							<li><a href="/reporting">Job Input</a></li>
 						</ul>
 					</li>
 					<li><a href="/reporting">Reporting</a></li>
