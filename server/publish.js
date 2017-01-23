@@ -14,3 +14,7 @@ Meteor.publish("queryInventory", function(query) {
 Meteor.publish("allJobs", function() {
 	return Jobs.find();
 })
+
+Meteor.publish("allVehicles", function() {
+	return Vehicles.find();
+})

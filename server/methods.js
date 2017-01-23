@@ -72,5 +72,30 @@ Meteor.methods({
 				user: Meteor.userId()
 			})
 		
+	},
+	
+	addVehicle(vehicleId, vehicleName, vehicleMake) {
+		if(!Meteor.userId()) {
+			throw new Meteor.Error('Not authorized')
+		}
+
+			Vehicles.insert({
+				vehicleId: vehicleId,
+				vehicleName: vehicleName,
+				vehicleMake: vehicleMake,
+				createdAt: new Date(),
+				user: Meteor.userId()
+			})
+		}
+	},
+	
+	deleteVehicle(vehicle) {
+		//can only delete vehicles user inserted
+		//might have to change
+		if(Meteor.userId() !== vehicle.user) {
+			throw new Meteor.Error('Not authorized')
+		}
+		Vehicles.remove(vehicle._id)
 	}
+	
 });

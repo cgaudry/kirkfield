@@ -26,6 +26,13 @@ export const MainLayout = ({content}) => (
 							<li><a href="/reporting">Job Input</a></li>
 						</ul>
 					</li>
+					<li className="dropdown">
+						<a className="dropdown-toggle" data-toggle="dropdown" href="#">Vehicles
+						<span className="caret"></span></a>
+						<ul className="dropdown-menu">
+							<li><a href="/vehicle/input">Vehicle Input</a></li>
+						</ul>
+					</li>
 					<li><a href="/reporting">Reporting</a></li>
 					<li><AccountsUI /></li>
 				</ul>

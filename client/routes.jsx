@@ -46,6 +46,14 @@ FlowRouter.route('/inventory/:id', {
 	}
 })
 
+FlowRouter.route('/vehicle/input', {
+	action() {
+		mount(MainLayout, {
+			content: (<VehicleInputWrapper />),
+		})
+	}
+})
+
 FlowRouter.route('/reporting', {
 	action() {
 		mount(MainLayout, {
