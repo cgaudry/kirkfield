@@ -1,7 +1,6 @@
 Inventory = new Mongo.Collection("inventory");
 Jobs = new Mongo.Collection("jobs");
-
-
+Vehicles = new Mongo.Collection("vehicles");
 
 Meteor.publish("allInventory", function() {
 	return Inventory.find();

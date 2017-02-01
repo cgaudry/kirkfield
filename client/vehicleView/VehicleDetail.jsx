@@ -7,7 +7,7 @@ export default class VehicleDetail extends TrackerReact(Component) {
 	constructor() {
 		super();
 
-		this.state = {
+	this.state = {
 			subscription: {
 				vehicles: Meteor.subscribe("allVehicles")
 			}

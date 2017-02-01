@@ -2,65 +2,63 @@ import React, {Component} from 'react';
 
 export default class VehicleForm extends Component {
 
-	addInventoryItem(event) {
+	addVehicle(event) {
 		event.preventDefault();
-		let inventoryItemId = this.refs.inventoryItemId.value.trim();
-		let inventoryItemName = this.refs.inventoryItemName.value.trim();
-		let inventoryItemQuantity = this.refs.inventoryItemQuantity.value.trim();
+		let vehicleId = this.refs.vehicleId.value.trim();
+		let vehicleName = this.refs.vehicleName.value.trim();
+		let vehicleMake = this.refs.vehicleMake.value.trim();
 		
 		//add further input validation rules here
-		if(inventoryItemId) {
-			Meteor.call('addInventoryItem', inventoryItemId, inventoryItemName, inventoryItemQuantity, (error, data) => {
+		if(vehicleId) {
+			Meteor.call('addVehicle', vehicleId, vehicleName, vehicleMake, (error, data) => {
 			if(error) {
 				Bert.alert('Please login before submitting', 'danger', 'fixed-top', 'fa-frown-o');
 			} else {
-			this.refs.inventoryItemId.value = "";
-			this.refs.inventoryItemName.value = "";
-			this.refs.inventoryItemQuantity.value = "";
+			this.refs.vehicleId.value = "";
+			this.refs.vehicleName.value = "";
+			this.refs.vehicleMake.value = "";
 			}
 		});
 		}
-
-		
 	}
 	
 	render() {
 		return(
 			
-			<form className="form-horizontal" onSubmit={this.addInventoryItem.bind(this)}>
+			<form className="form-horizontal" onSubmit={this.addVehicle.bind(this)}>
 					<div className="form-group">
-					<label className="control-label col-sm-2" htmlFor="itemId">Item Id:</label>
+					<label className="control-label col-sm-2" htmlFor="vehicleId">Vehicle Id:</label>
 					<div className="col-sm-10">
 					<input 
 						className="form-control"
-						id="itemId"
+						id="vehicleId"
 						type="text" 
-						ref="inventoryItemId"
-						placeholder="Item Id"
+						ref="vehicleId"
+						placeholder="Vehicle Id"
 					/>
 					</div>
 					</div>
 					<div className="form-group">
-					<label className="control-label col-sm-2" htmlFor="itemName">Item Name:</label>
+					<label className="control-label col-sm-2" htmlFor="vehicleName">Vehicle Name:</label>
 					<div className="col-sm-10">
 					<input 
 						className="form-control"
-						id="itemName"
+						id="vehicleName"
 						type="text" 
-						ref="inventoryItemName"
-						placeholder="Item Name"
+						ref="vehicleName"
+						placeholder="Vehicle Name"
 					/>
 					</div>
 					</div>
 					<div className="form-group">
-					<label className="control-label col-sm-2" htmlFor="itemQuantity">Item Quantity:</label>
+					<label className="control-label col-sm-2" htmlFor="vehicleMake">Make:</label>
 					<div className="col-sm-10">
 					<input 
 						className="form-control"
-						id="itemQuantity"
-						type="number" 
-						ref="inventoryItemQuantity"
-						placeholder="Item Quantity"
+						id="vehicleMake"
+						type="text" 
+						ref="vehicleMake"
+						placeholder="Make"
 					/>
 					</div>
 					</div>

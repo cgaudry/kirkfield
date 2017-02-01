@@ -79,14 +79,14 @@ Meteor.methods({
 			throw new Meteor.Error('Not authorized')
 		}
 
-			Vehicles.insert({
-				vehicleId: vehicleId,
-				vehicleName: vehicleName,
-				vehicleMake: vehicleMake,
-				createdAt: new Date(),
-				user: Meteor.userId()
-			})
-		}
+		Vehicles.insert({
+			vehicleId: vehicleId,
+			vehicleName: vehicleName,
+			vehicleMake: vehicleMake,
+			createdAt: new Date(),
+			user: Meteor.userId()
+			//add model year, license plate, color, w/e
+		})
 	},
 	
 	deleteVehicle(vehicle) {

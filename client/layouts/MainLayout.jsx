@@ -30,7 +30,8 @@ export const MainLayout = ({content}) => (
 						<a className="dropdown-toggle" data-toggle="dropdown" href="#">Vehicles
 						<span className="caret"></span></a>
 						<ul className="dropdown-menu">
-							<li><a href="/vehicle/input">Vehicle Input</a></li>
+							<li><a href="/vehicles">Vehicles</a></li>
+							<li><a href="/vehicleInput">Vehicle Input</a></li>
 						</ul>
 					</li>
 					<li><a href="/reporting">Reporting</a></li>

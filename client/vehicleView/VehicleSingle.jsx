@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 
 export default class VehicleSingle extends Component {
 
-	deleteInventoryItem() {
+	deleteVehicle() {
 		Meteor.call('deleteVehicle', this.props.vehicle);
 	}
 
@@ -10,7 +10,7 @@ export default class VehicleSingle extends Component {
 		return (
 			<tr>
 				<td>
-					<a href={`/vehicles/${this.props.vehicle._id}`}>{this.props.vehicle.vehicleId}</a>
+					<a href={`/vehicle/${this.props.vehicle._id}`}>{this.props.vehicle.vehicleId}</a>
 				</td>
 				<td>
 					{this.props.vehicle.vehicleName} 
