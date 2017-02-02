@@ -4,7 +4,7 @@ import TrackerReact from 'meteor/ultimatejs:tracker-react';
 
 import VehicleForm from './VehicleForm.jsx';
 import VehicleSingle from './VehicleSingle.jsx';
-
+import {Vehicles} from './../vehicleView/VehicleInputWrapper.jsx';
 
 
 

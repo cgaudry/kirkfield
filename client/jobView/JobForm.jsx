@@ -51,6 +51,8 @@ export default class JobForm extends Component {
 	}
 	
 	render() {
+		let vehicles = this.props.vehicles;
+		console.log(vehicles);
 		return(
 			<form className="form-horizontal" onSubmit={this.addJob.bind(this)}>
 				<div className="form-group">
@@ -217,13 +219,21 @@ export default class JobForm extends Component {
 				<div className="form-group">
 					<label className="control-label col-sm-2" htmlFor="vehicleId">Vehicle Id:</label>
 					<div className="col-sm-4">
-					<input 
-						type="text"
+					<select 
 						className="form-control"
 						id="vehicleId"
 						ref="vehicleId"
-						placeholder="Vehicle Id"
-					/>
+					>
+						{vehicles.map( (vehicles) => {
+							return <option 
+										key={vehicles._id} 
+										value={vehicles.vehicleName} 
+										>
+										{vehicles.vehicleName}
+									</option>
+						})}
+			
+					</select>
 					</div>
 					
 					<label className="control-label col-sm-2" htmlFor="mileage">Mileage:</label>

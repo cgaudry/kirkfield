@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import TrackerReact from 'meteor/ultimatejs:tracker-react';
 
+import {Vehicles} from './../vehicleView/VehicleInputWrapper.jsx';
 
 export default class VehicleDetail extends TrackerReact(Component) {
 

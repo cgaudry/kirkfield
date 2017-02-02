@@ -6,7 +6,7 @@ import VehicleForm from './VehicleForm.jsx';
 import VehicleSingle from './VehicleSingle.jsx';
 
 
-Vehicles = new Mongo.Collection("vehicles");
+export const Vehicles = new Mongo.Collection("vehicles");
 
 export default class VehicleInputWrapper extends TrackerReact(React.Component) {
 	constructor() {
