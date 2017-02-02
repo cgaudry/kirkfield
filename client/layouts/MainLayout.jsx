@@ -2,18 +2,40 @@ import React from 'react';
 import AccountsUI from '../AccountsUI.jsx';
 
 export const MainLayout = ({content}) => (
-	<div className="main-layout">
+	<div className="container">
 	<header>
 		<h2>Kirkfield Web Portal</h2>
-		<nav>
-			<a href="/inventoryInput">InventoryInput</a>
-			<a href="/inventorySearch">InventorySearch</a>
-			<a href="/reporting">Reporting</a>
-			<AccountsUI />
+		<nav className="navbar navbar-default">
+			<div>
+				<div className="navbar-header">
+				<a className="navbar-brand" href="#">Kirkfield</a>
+				</div>
+				<ul className="nav navbar-nav">
+					<li className="dropdown">
+						<a className="dropdown-toggle" data-toggle="dropdown" href="#">Inventory
+						<span className="caret"></span></a>
+						<ul className="dropdown-menu">
+							<li><a href="/inventoryInput">Inventory Input</a></li>
+							<li><a href="/inventorySearch">Inventory Search</a></li>
+						</ul>
+					</li>
+					<li className="dropdown">
+						<a className="dropdown-toggle" data-toggle="dropdown" href="#">Jobs
+						<span className="caret"></span></a>
+						<ul className="dropdown-menu">
+							<li><a href="/reporting">Job Input</a></li>
+						</ul>
+					</li>
+					<li><a href="/reporting">Reporting</a></li>
+					<li><AccountsUI /></li>
+				</ul>
+			</div>
 		</nav>
 	</header>
 	<main>
-		{content}
+		<div>
+			{content}
+		</div>
 	</main>
 	</div>
 )

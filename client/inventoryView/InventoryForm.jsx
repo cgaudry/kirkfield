@@ -26,26 +26,45 @@ export default class InventoryForm extends Component {
 	
 	render() {
 		return(
-			<form className="new-resolution" onSubmit={this.addInventoryItem.bind(this)}>
+			
+			<form className="form-horizontal" onSubmit={this.addInventoryItem.bind(this)}>
+					<div className="form-group">
+					<label className="control-label col-sm-2" htmlFor="itemId">Item Id:</label>
+					<div className="col-sm-10">
 					<input 
+						className="form-control"
 						id="itemId"
 						type="text" 
 						ref="inventoryItemId"
 						placeholder="Item Id"
 					/>
+					</div>
+					</div>
+					<div className="form-group">
+					<label className="control-label col-sm-2" htmlFor="itemName">Item Name:</label>
+					<div className="col-sm-10">
 					<input 
+						className="form-control"
 						id="itemName"
 						type="text" 
 						ref="inventoryItemName"
 						placeholder="Item Name"
 					/>
+					</div>
+					</div>
+					<div className="form-group">
+					<label className="control-label col-sm-2" htmlFor="itemQuantity">Item Quantity:</label>
+					<div className="col-sm-10">
 					<input 
+						className="form-control"
 						id="itemQuantity"
 						type="number" 
 						ref="inventoryItemQuantity"
 						placeholder="Item Quantity"
 					/>
-					<input type="submit" />
+					</div>
+					</div>
+					<input type="submit" className="btn btn-primary pull-right"/>
 				</form>
 			)
 	}
