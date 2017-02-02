@@ -52,83 +52,192 @@ export default class JobForm extends Component {
 	
 	render() {
 		return(
-			<form className="new-resolution" onSubmit={this.addJob.bind(this)}>
+			<form className="form-horizontal" onSubmit={this.addJob.bind(this)}>
+				<div className="form-group">
+					<label className="control-label col-sm-2" htmlFor="invoiceNumber">Invoice Number:</label>
+					<div className="col-sm-10">
 					<input 
 						type="number" 
+						className="form-control"
+						id="invoiceNumber"
 						ref="invoice"
 						placeholder="Invoice"
 					/>
+					</div>
+				</div>
+				
+				<div className="well well-sm">
+				<h3>Customer</h3>
+				<div className="form-group">
+					<label className="control-label col-sm-2" htmlFor="firstName">First Name:</label>
+					<div className="col-sm-4">
 					<input 
 						type="text" 
+						className="form-control"
+						id="firstName"
 						ref="firstName"
 						placeholder="First Name"
 					/>
+					</div>
+				
+					<label className="control-label col-sm-2" htmlFor="lastName">Last Name:</label>
+					<div className="col-sm-4">
 					<input 
 						type="text" 
+						className="form-control"
+						id="lastName"
 						ref="lastName"
 						placeholder="Last Name"
 					/>
+					</div>
+				</div>
+				
+				<div className="form-group">
+					<label className="control-label col-sm-2" htmlFor="address">Address:</label>
+					<div className="col-sm-10">
 					<input 
 						type="text" 
+						className="form-control"
+						id="address"
 						ref="address"
 						placeholder="Address"
 					/>
+					</div>
+				</div>
+				
+				<div className="form-group">
+					<label className="control-label col-sm-2" htmlFor="phoneNumber">Phone Number:</label>
+					<div className="col-sm-4">
 					<input 
-						type="number" 
+						type="number"
+						className="form-control"
+						id="phoneNumber"
 						ref="phoneNumber"
 						placeholder="Phone Number"
 					/>
+					</div>
+					
+					<label className="control-label col-sm-2" htmlFor="email">Email Address:</label>
+					<div className="col-sm-4">
 					<input 
 						type="text" 
+						className="form-control"
+						id="email"
 						ref="email"
 						placeholder="Email"
 					/>
+					</div>
+				</div>
+				</div>
+				
+				<div className="form-group">
+					<label className="control-label col-sm-2" htmlFor="jobTypeCode">Job Type Code:</label>
+					<div className="col-sm-4">
 					<input 
-						type="text" 
+						type="text"
+						className="form-control"
+						id="jobTypeCode"
 						ref="jobTypeCode"
 						placeholder="Job Type Code"
 					/>
+					</div>
+				</div>
+				
+				
+				<div className="form-group">
+					<label className="control-label col-sm-2" htmlFor="estimateCost">Estimate Cost:</label>
+					<div className="col-sm-2">
 					<input 
-						type="number" 
+						type="number"
+						className="form-control"
+						id="estimateCost"
 						ref="estimateCost"
 						placeholder="Estimate Cost"
 					/>
+					</div>
+					
+					<label className="control-label col-sm-2" htmlFor="estimateParts">Estimate Parts:</label>
+					<div className="col-sm-2">
 					<input 
-						type="text" 
+						type="text"
+						className="form-control"
+						id="estimateParts"
 						ref="estimateParts"
 						placeholder="Estimate Parts"
 					/>
+					</div>
+					
+					<label className="control-label col-sm-2" htmlFor="estimateEmployee">Estimate Employee:</label>
+					<div className="col-sm-2">
 					<input 
-						type="text" 
+						type="text"
+						className="form-control"
+						id="estimateEmployee"
 						ref="estimateEmployee"
 						placeholder="Estimate Employee"
 					/>
+					</div>
+				</div>
+				
+				<div className="form-group">
+					<label className="control-label col-sm-2" htmlFor="installCost">Install Cost:</label>
+					<div className="col-sm-2">
 					<input 
-						type="number" 
+						type="number"
+						className="form-control"
+						id="installCost"
 						ref="installCost"
 						placeholder="Install Cost"
 					/>
+					</div>
+					
+					<label className="control-label col-sm-2" htmlFor="installParts">Install Parts:</label>
+					<div className="col-sm-2">
 					<input 
-						type="text" 
+						type="text"
+						className="form-control"
+						id="installParts"
 						ref="installParts"
 						placeholder="Install Parts"
 					/>
+					</div>
+					
+					<label className="control-label col-sm-2" htmlFor="installEmployee">Install Employee:</label>
+					<div className="col-sm-2">
 					<input 
-						type="text" 
+						type="text"
+						className="form-control"
+						id="installEmployee"
 						ref="installEmployee"
 						placeholder="Install Employee"
 					/>
+					</div>
+				</div>
+				
+				<div className="form-group">
+					<label className="control-label col-sm-2" htmlFor="vehicleId">Vehicle Id:</label>
+					<div className="col-sm-4">
 					<input 
-						type="text" 
+						type="text"
+						className="form-control"
+						id="vehicleId"
 						ref="vehicleId"
 						placeholder="Vehicle Id"
 					/>
+					</div>
+					
+					<label className="control-label col-sm-2" htmlFor="mileage">Mileage:</label>
+					<div className="col-sm-4">
 					<input 
-						type="number" 
+						type="number"
+						className="form-control"
+						id="mileage"
 						ref="mileage"
 						placeholder="Job Mileage"
 					/>
-					<input type="submit" />
+					</div>
+				</div>
+					<input type="submit" className="btn btn-primary pull-right"/>
 				</form>
 			)
 	}

@@ -96,6 +96,7 @@ export default class InventorySingle extends Component {
 		const status = this.props.inventoryItem.complete ? <span className="completed">Completed</span> : '';
 
 		return (
+
 			<div>
 			<li className={resolutionClass}>
 			<input type="checkbox"
@@ -105,6 +106,7 @@ export default class InventorySingle extends Component {
 			{ this.state.editMode ? this.editView() :this.normalView() }
 			</li>
 			</div>
+
 		)
 	}
 }

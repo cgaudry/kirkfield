@@ -33,15 +33,37 @@ export default class InventoryInputWrapper extends TrackerReact(React.Component)
 		
 		return(
 			<div>
-				<h1>Add Inventory Item</h1>
-				<InventoryForm />
-				<ul className="resolutions">
-					{this.inventoryItems().map( (inventoryItems) => {
-						return <InventorySingle key={inventoryItems._id} inventoryItem={inventoryItems} />
-					})}
-				</ul>
+				<div className="panel panel-primary">
+				<div className="panel-heading">
+					<h1>Add Inventory Item</h1>
+				</div>
+				<div className="panel-body">
+					<InventoryForm />
+				</div>
+				</div>
+				
+				<div className="panel panel-primary">
+				<div className="panel-heading">
+					<h1>Recently Added Inventory</h1>
+				</div>
+				<div className="panel-body">
+					<table className="table">
+						<thead>
+							<tr>
+								<td>Item Id</td>
+								<td>Item Name</td>
+								<td>Item Quantity</td>
+							</tr>
+						</thead>
+						<tbody>
+						{this.inventoryItems().map( (inventoryItems) => {
+							return <InventorySingle key={inventoryItems._id} inventoryItem={inventoryItems} />
+						})}
+						</tbody>
+					</table>
+				</div>
+				</div>
 			</div>
-
 		)
 	}
 }

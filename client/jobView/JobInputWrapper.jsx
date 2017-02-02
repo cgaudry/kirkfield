@@ -32,16 +32,28 @@ export default class JobInputWrapper extends TrackerReact(React.Component) {
 	render() {
 		
 		return(
-			<div>
-				<h1>Add Job Details</h1>
-				<JobForm />
+		<div>
+			<div className="panel panel-primary">
+				<div className="panel-heading">
+					<h1>Add Job Details</h1>
+				</div>
+				<div className="panel-body">
+					<JobForm />
+				</div>
+			</div>
+			<div className="panel panel-primary">
+				<div className="panel-heading">
+					<h1>Recently Added Jobs</h1>
+				</div>
+				<div className="panel-body">
 				<ul className="resolutions">
 					{this.jobItems().map( (jobItems) => {
 						return <JobSingle key={jobItems._id} jobItem={jobItems} />
 					})}
 				</ul>
+				</div>
 			</div>
-
+		</div>
 		)
 	}
 }
