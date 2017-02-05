@@ -36,6 +36,27 @@ Meteor.methods({
 		}
 	},
 
+	editInventoryItem(inventoryItem, inventoryItemName, inventoryItemQuantity) {
+		if(!Meteor.userId()) {
+			throw new Meteor.Error('Not authorized')
+		}
+		entry = Inventory.findOne({_id: inventoryItem._id})
+		if(entry) {
+			console.log("Attempting database update...");
+			newQuantity = parseInt(inventoryItemQuantity)
+			Inventory.update(
+				{_id: entry._id},
+				{$set: {inventoryItemName: inventoryItemName}}
+				)
+			Inventory.update(
+				{_id: entry._id},
+				{$set: {inventoryItemQuantity: newQuantity}}
+				)
+		} else {
+			throw new Meteor.Error('Invalid ID')
+		}
+	},
+
 	deleteInventoryItem(inventoryItem) {
 		//can only delete items user inserted
 		//might have to change
