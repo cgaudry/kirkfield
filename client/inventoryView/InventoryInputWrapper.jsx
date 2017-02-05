@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import TrackerReact from 'meteor/ultimatejs:tracker-react';
 
+import {Table, Column, Cell} from 'fixed-data-table';
 import InventoryForm from './InventoryForm.jsx';
 import InventorySingle from './InventorySingle.jsx';
 
@@ -15,8 +16,9 @@ export default class InventoryInputWrapper extends TrackerReact(React.Component)
 		this.state = {
 			subscription: {
 				inventory: Meteor.subscribe("allInventory")
-			}
-		}
+			},
+			recent: this.recent()
+		};
 	}
 
 	componentWillUnmount() {
@@ -27,8 +29,10 @@ export default class InventoryInputWrapper extends TrackerReact(React.Component)
 		return Inventory.find().fetch();
 	}
 
+	recent() {
+		return Inventory.find();
+	}
 	
-
 	render() {
 		
 		return(
@@ -47,20 +51,37 @@ export default class InventoryInputWrapper extends TrackerReact(React.Component)
 					<h1>Recently Added Inventory</h1>
 				</div>
 				<div className="panel-body">
-					<table className="table">
-						<thead>
-							<tr>
-								<td>Item Id</td>
-								<td>Item Name</td>
-								<td>Item Quantity</td>
-							</tr>
-						</thead>
+					<Table
+						rowsCount={this.state.recent.count()}
+						rowHeight={50}
+						headerHeight={50}
+						width={800}
+						height={500}>
+						<Column
+							header={<Cell>Item Id</Cell>}
+							cell={props => (
+								<Cell {...props}>
+									{this.state.recent.fetch().inventoryItemId}
+								</Cell>
+								)}
+							width={200}
+						/>
+						<Column
+							header={<Cell>Item Name</Cell>}
+							cell={<Cell>Name</Cell>}
+							width={200}
+						/>
+						<Column
+							header={<Cell>Item Quantity</Cell>}
+							cell={<Cell>Qty</Cell>}
+							width={200}
+						/>
 						<tbody>
 						{this.inventoryItems().map( (inventoryItems) => {
 							return <InventorySingle key={inventoryItems._id} inventoryItem={inventoryItems} />
 						})}
 						</tbody>
-					</table>
+					</Table>
 				</div>
 				</div>
 			</div>
