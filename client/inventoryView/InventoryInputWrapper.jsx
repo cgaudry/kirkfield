@@ -17,7 +17,6 @@ export default class InventoryInputWrapper extends TrackerReact(React.Component)
 			subscription: {
 				inventory: Meteor.subscribe("allInventory")
 			},
-			recent: this.recent()
 		};
 	}
 
@@ -34,7 +33,7 @@ export default class InventoryInputWrapper extends TrackerReact(React.Component)
 	}
 	
 	render() {
-		
+		this.state.recent = this.inventoryItems();
 		return(
 			<div>
 				<div className="panel panel-primary">
@@ -52,7 +51,7 @@ export default class InventoryInputWrapper extends TrackerReact(React.Component)
 				</div>
 				<div className="panel-body">
 					<Table
-						rowsCount={this.state.recent.count()}
+						rowsCount={this.state.recent.length}
 						rowHeight={50}
 						headerHeight={50}
 						width={800}
@@ -61,26 +60,29 @@ export default class InventoryInputWrapper extends TrackerReact(React.Component)
 							header={<Cell>Item Id</Cell>}
 							cell={props => (
 								<Cell {...props}>
-									{this.state.recent.fetch().inventoryItemId}
+									{this.state.recent[props.rowIndex].inventoryItemId}
 								</Cell>
 								)}
 							width={200}
 						/>
 						<Column
 							header={<Cell>Item Name</Cell>}
-							cell={<Cell>Name</Cell>}
+							cell={props => (
+								<Cell {...props}>
+									{this.state.recent[props.rowIndex].inventoryItemName}
+								</Cell>
+								)}
 							width={200}
 						/>
 						<Column
 							header={<Cell>Item Quantity</Cell>}
-							cell={<Cell>Qty</Cell>}
+							cell={props => (
+								<Cell {...props}>
+									{this.state.recent[props.rowIndex].inventoryItemQuantity}
+								</Cell>
+								)}
 							width={200}
 						/>
-						<tbody>
-						{this.inventoryItems().map( (inventoryItems) => {
-							return <InventorySingle key={inventoryItems._id} inventoryItem={inventoryItems} />
-						})}
-						</tbody>
 					</Table>
 				</div>
 				</div>
