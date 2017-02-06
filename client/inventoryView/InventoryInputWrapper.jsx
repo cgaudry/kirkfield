@@ -1,11 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import TrackerReact from 'meteor/ultimatejs:tracker-react';
+import GetContainerDimensions from 'react-dimensions'
 
 import {Table, Column, Cell} from 'fixed-data-table';
 import InventoryForm from './InventoryForm.jsx';
 import InventorySingle from './InventorySingle.jsx';
-
+import DataTable from './DataTable.jsx';
 
 Inventory = new Mongo.Collection("inventory");
 
@@ -49,41 +50,8 @@ export default class InventoryInputWrapper extends TrackerReact(React.Component)
 				<div className="panel-heading">
 					<h1>Recently Added Inventory</h1>
 				</div>
-				<div className="panel-body">
-					<Table
-						rowsCount={this.state.recent.length}
-						rowHeight={50}
-						headerHeight={50}
-						width={800}
-						height={500}>
-						<Column
-							header={<Cell>Item Id</Cell>}
-							cell={props => (
-								<Cell {...props}>
-									{this.state.recent[props.rowIndex].inventoryItemId}
-								</Cell>
-								)}
-							width={200}
-						/>
-						<Column
-							header={<Cell>Item Name</Cell>}
-							cell={props => (
-								<Cell {...props}>
-									{this.state.recent[props.rowIndex].inventoryItemName}
-								</Cell>
-								)}
-							width={200}
-						/>
-						<Column
-							header={<Cell>Item Quantity</Cell>}
-							cell={props => (
-								<Cell {...props}>
-									{this.state.recent[props.rowIndex].inventoryItemQuantity}
-								</Cell>
-								)}
-							width={200}
-						/>
-					</Table>
+				<div className="panel-body" style={{backgroundColor: 'blue', height:'100%', width: '100%'}}>
+					<DataTable recent={this.state.recent}/>
 				</div>
 				</div>
 			</div>
