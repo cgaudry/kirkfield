@@ -35,6 +35,7 @@ export default class InventoryInputWrapper extends TrackerReact(React.Component)
 	
 	render() {
 		this.state.recent = this.inventoryItems();
+		let tableRowHeight = 50;
 		return(
 			<div>
 				<div className="panel panel-primary">
@@ -50,8 +51,13 @@ export default class InventoryInputWrapper extends TrackerReact(React.Component)
 				<div className="panel-heading">
 					<h1>Recently Added Inventory</h1>
 				</div>
-				<div className="panel-body" style={{backgroundColor: 'blue', height:'100%', width: '100%'}}>
-					<DataTable recent={this.state.recent}/>
+				<div className="panel-body">
+					<DataTable 
+						rowHeight={tableRowHeight}
+						columns={['inventoryItemId', 'inventoryItemName', 'inventoryItemQuantity']}
+						columnNames={['Item Id', 'Item Name', 'Quantity']}
+						recent={this.state.recent}
+					/>
 				</div>
 				</div>
 			</div>

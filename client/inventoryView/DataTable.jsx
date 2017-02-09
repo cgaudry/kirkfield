@@ -7,43 +7,27 @@ import {Table, Column, Cell} from 'fixed-data-table';
 class DataTable extends React.Component {
 	
 	render() {
-		return (<Table	className="center-block"
+		return (<Table	
 						rowsCount={this.props.recent.length}
-						rowHeight={50}
-						headerHeight={50}
+						rowHeight={this.props.rowHeight}
+						headerHeight={this.props.rowHeight}
 						width={this.props.containerWidth}
-						maxHeight={500}
+						maxHeight={this.props.rowHeight * 10}
 						>
-						<Column
-							header={<Cell>Item Id</Cell>}
-							cell={props => (
-								<Cell {...props}>
-									{this.props.recent[props.rowIndex].inventoryItemId}
-								</Cell>
-								)}
-							flexgrow={1}
-							width={this.props.containerWidth / 3}
-						/>
-						<Column
-							header={<Cell>Item Name</Cell>}
-							cell={props => (
-								<Cell {...props}>
-									{this.props.recent[props.rowIndex].inventoryItemName}
-								</Cell>
-								)}
-							flexgrow={1}
-							width={this.props.containerWidth / 3}
-						/>
-						<Column
-							header={<Cell>Item Quantity</Cell>}
-							cell={props => (
-								<Cell {...props}>
-									{this.props.recent[props.rowIndex].inventoryItemQuantity}
-								</Cell>
-								)}
-							flexgrow={1}
-							width={this.props.containerWidth / 3}
-						/>
+						{this.props.columns.map( (col) => {
+							
+							return <Column
+									key={col}
+									header={<Cell>{this.props.columnNames[this.props.columns.indexOf(col)]}</Cell>}
+									cell={props => (
+									<Cell {...props}>
+										{this.props.recent[props.rowIndex][col]}
+									</Cell>
+									)}
+								flexgrow={1}
+								width={this.props.containerWidth / this.props.columns.length}/>
+							}
+						)}
 					</Table>)
 	}
 }
