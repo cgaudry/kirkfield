@@ -95,7 +95,8 @@ Meteor.methods({
 		
 	},
 	
-	addVehicle(vehicleId, vehicleName, vehicleMake) {
+	addVehicle(vehicleId, vehicleName, vehicleMake,
+		vehicleModel, vehicleModelYear, licensePlate) {
 		if(!Meteor.userId()) {
 			throw new Meteor.Error('Not authorized')
 		}
@@ -104,6 +105,9 @@ Meteor.methods({
 			vehicleId: vehicleId,
 			vehicleName: vehicleName,
 			vehicleMake: vehicleMake,
+			vehicleModel: vehicleModel,
+			vehicleModelYear: vehicleModelYear,
+			licensePlate: licensePlate,
 			createdAt: new Date(),
 			user: Meteor.userId()
 			//add model year, license plate, color, w/e
