@@ -93,5 +93,34 @@ Meteor.methods({
 				user: Meteor.userId()
 			})
 		
+	},
+	
+	addVehicle(vehicleId, vehicleName, vehicleMake,
+		vehicleModel, vehicleModelYear, licensePlate) {
+		if(!Meteor.userId()) {
+			throw new Meteor.Error('Not authorized')
+		}
+
+		Vehicles.insert({
+			vehicleId: vehicleId,
+			vehicleName: vehicleName,
+			vehicleMake: vehicleMake,
+			vehicleModel: vehicleModel,
+			vehicleModelYear: vehicleModelYear,
+			licensePlate: licensePlate,
+			createdAt: new Date(),
+			user: Meteor.userId()
+			//add model year, license plate, color, w/e
+		})
+	},
+	
+	deleteVehicle(vehicle) {
+		//can only delete vehicles user inserted
+		//might have to change
+		if(Meteor.userId() !== vehicle.user) {
+			throw new Meteor.Error('Not authorized')
+		}
+		Vehicles.remove(vehicle._id)
 	}
+	
 });

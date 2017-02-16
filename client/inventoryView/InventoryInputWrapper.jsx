@@ -1,10 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import TrackerReact from 'meteor/ultimatejs:tracker-react';
+import GetContainerDimensions from 'react-dimensions'
 
+import {Table, Column, Cell} from 'fixed-data-table';
 import InventoryForm from './InventoryForm.jsx';
 import InventorySingle from './InventorySingle.jsx';
-
+import DataTable from './DataTable.jsx';
 
 Inventory = new Mongo.Collection("inventory");
 
@@ -15,8 +17,8 @@ export default class InventoryInputWrapper extends TrackerReact(React.Component)
 		this.state = {
 			subscription: {
 				inventory: Meteor.subscribe("allInventory")
-			}
-		}
+			},
+		};
 	}
 
 	componentWillUnmount() {
@@ -27,10 +29,13 @@ export default class InventoryInputWrapper extends TrackerReact(React.Component)
 		return Inventory.find().fetch();
 	}
 
+	recent() {
+		return Inventory.find();
+	}
 	
-
 	render() {
-		
+		this.state.recent = this.inventoryItems();
+		let tableRowHeight = 50;
 		return(
 			<div>
 				<div className="panel panel-primary">
@@ -47,20 +52,12 @@ export default class InventoryInputWrapper extends TrackerReact(React.Component)
 					<h1>Recently Added Inventory</h1>
 				</div>
 				<div className="panel-body">
-					<table className="table">
-						<thead>
-							<tr>
-								<td>Item Id</td>
-								<td>Item Name</td>
-								<td>Item Quantity</td>
-							</tr>
-						</thead>
-						<tbody>
-						{this.inventoryItems().map( (inventoryItems) => {
-							return <InventorySingle key={inventoryItems._id} inventoryItem={inventoryItems} />
-						})}
-						</tbody>
-					</table>
+					<DataTable 
+						rowHeight={tableRowHeight}
+						columns={['inventoryItemId', 'inventoryItemName', 'inventoryItemQuantity']}
+						columnNames={['Item Id', 'Item Name', 'Quantity']}
+						recent={this.state.recent}
+					/>
 				</div>
 				</div>
 			</div>
