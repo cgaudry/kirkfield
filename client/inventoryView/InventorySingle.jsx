@@ -18,9 +18,9 @@ export default class InventorySingle extends Component {
 		this.setState({editMode: false});
 	}
 
-	componentWillUnmount() {
-		Blaze.remove(this.view);
-	}
+	//componentWillUnmount() {
+	//	Blaze.remove(this.view);
+	//}
 
 	setNormalMode() {
 		this.setState({editMode: false});
