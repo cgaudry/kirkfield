@@ -23,7 +23,7 @@ export const MainLayout = ({content}) => (
 						<a className="dropdown-toggle" data-toggle="dropdown" href="#">Jobs
 						<span className="caret"></span></a>
 						<ul className="dropdown-menu">
-							<li><a href="/reporting">Job Input</a></li>
+							<li><a href="/jobInput">Job Input</a></li>
 						</ul>
 					</li>
 					<li className="dropdown">

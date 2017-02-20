@@ -2,6 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import TrackerReact from 'meteor/ultimatejs:tracker-react';
 
+import TestReport from './reportTypes/TestReport';
+
 
 
 
@@ -15,6 +17,7 @@ export default class ReportWrapper extends TrackerReact(React.Component) {
 		
 		this.handleChange = this.handleChange.bind(this);
 		this.handleSubmit = this.handleSubmit.bind(this);
+		this.reportInputs = this.reportInputs.bind(this);
 
 	}
 
@@ -31,7 +34,12 @@ export default class ReportWrapper extends TrackerReact(React.Component) {
 		event.preventDefault();
 	}
 
-	jobItems() {
+	reportInputs() {
+		reportType = this.state.value;
+
+		if(reportType == 'TestReport')
+			return(<TestReport />)
+		
 		
 	}
 
@@ -45,12 +53,14 @@ export default class ReportWrapper extends TrackerReact(React.Component) {
 					<label>
 						Chose report:
 						<select value={this.state.value} onChange={this.handleChange}>
-							<option value="report1">Report 1</option>
+							<option value=""> </option>
+							<option value="TestReport">Test Report</option>
 							<option value="report2">Report 2</option>
 							<option value="report3">Report 3</option>
 						</select>
 					</label>	
 					<input type="submit" value="submit"/>
+					{this.reportInputs()}
 				</form>
 			</div>
 

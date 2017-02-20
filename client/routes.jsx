@@ -13,6 +13,8 @@ import VehicleInputWrapper from './vehicleView/VehicleInputWrapper.jsx';
 import VehiclesWrapper from './vehicleView/VehiclesWrapper.jsx';
 import VehicleDetail from './vehicleView/VehicleDetail.jsx';
 
+import ReportWrapper from './reportView/ReportWrapper.jsx';
+
 import HomePage from './HomePage.jsx';
 
 
@@ -75,6 +77,14 @@ FlowRouter.route('/vehicle/:id', {
 })
 
 FlowRouter.route('/reporting', {
+	action() {
+		mount(MainLayout, {
+			content: (<ReportWrapper />),
+		})
+	}
+})
+
+FlowRouter.route('/jobInput', {
 	action() {
 		mount(MainLayout, {
 			content: (<JobInputWrapper />),
