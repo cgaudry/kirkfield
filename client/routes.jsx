@@ -15,6 +15,9 @@ import VehicleDetail from './vehicleView/VehicleDetail.jsx';
 
 import ReportWrapper from './reportView/ReportWrapper.jsx';
 
+import EmployeeInputWrapper from './employeeView/EmployeeInputWrapper.jsx';
+
+
 import HomePage from './HomePage.jsx';
 
 
@@ -91,4 +94,13 @@ FlowRouter.route('/jobInput', {
 		})
 	}
 })
+
+FlowRouter.route('/employees', {
+	action() {
+		mount(MainLayout, {
+			content: (<EmployeeInputWrapper />),
+		})
+	}
+})
+
 

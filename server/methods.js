@@ -121,6 +121,28 @@ Meteor.methods({
 			throw new Meteor.Error('Not authorized')
 		}
 		Vehicles.remove(vehicle._id)
-	}
+	},
+
+	addEmployee(employeeId, employeeName) {
+		if(!Meteor.userId()) {
+			throw new Meteor.Error('Not authorized')
+		}
+
+		Employees.insert({
+			employeeId: employeeId,
+			employeeName: employeeName,
+			createdAt: new Date(),
+			user: Meteor.userId()
+		})
+	},
+
+	deleteEmployee(employee) {
+		//can only delete vehicles user inserted
+		//might have to change
+		if(Meteor.userId() !== employee.user) {
+			throw new Meteor.Error('Not authorized')
+		}
+		Employees.remove(employee._id)
+	},
 	
 });

@@ -34,6 +34,8 @@ export default class ReportWrapper extends TrackerReact(React.Component) {
 		event.preventDefault();
 	}
 
+	//This will act as a running list of report types
+	//for conditional rendering based on the select forms value
 	reportInputs() {
 		reportType = this.state.value;
 

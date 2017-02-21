@@ -1,6 +1,7 @@
 Inventory = new Mongo.Collection("inventory");
 Jobs = new Mongo.Collection("jobs");
 Vehicles = new Mongo.Collection("vehicles");
+Employees = new Mongo.Collection("employees");
 
 Meteor.publish("allInventory", function() {
 	return Inventory.find();
@@ -16,4 +17,8 @@ Meteor.publish("allJobs", function() {
 
 Meteor.publish("allVehicles", function() {
 	return Vehicles.find();
+})
+
+Meteor.publish("allEmployees", function() {
+	return Employees.find();
 })
