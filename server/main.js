@@ -26,7 +26,7 @@ Meteor.startup(() => {
 	if(Jobs.find().count() === 0) {
 		Jobs.insert({
 				invoice: 1,
-				date: '01-01-2017',
+				date: new Date(2017, 0, 1),
 				firstName: 'Billy',
 				lastName: 'Bob',
 				address: '69 Thorton Bay',
@@ -48,7 +48,7 @@ Meteor.startup(() => {
 
 		Jobs.insert({
 				invoice: 2,
-				date: '02-01-2017',
+				date: new Date(2017, 0, 2),
 				firstName: 'Joe',
 				lastName: 'Rogan',
 				address: '123 Easy Street',
@@ -70,7 +70,7 @@ Meteor.startup(() => {
 
 		Jobs.insert({
 				invoice: 3,
-				date: '03-01-2017',
+				date: new Date(2017, 0, 3),
 				firstName: 'Joe',
 				lastName: 'Rogan',
 				address: '123 Easy Street',
@@ -92,7 +92,7 @@ Meteor.startup(() => {
 
 		Jobs.insert({
 				invoice: 4,
-				date: '04-01-2017',
+				date: new Date(2017, 0, 4),
 				firstName: 'Joe',
 				lastName: 'Rogan',
 				address: '123 Easy Street',
@@ -114,7 +114,7 @@ Meteor.startup(() => {
 
 		Jobs.insert({
 				invoice: 5,
-				date: '05-01-2017',
+				date: new Date(2017, 0, 5),
 				firstName: 'Joe',
 				lastName: 'Rogan',
 				address: '123 Easy Street',

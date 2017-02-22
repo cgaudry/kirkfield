@@ -71,10 +71,14 @@ Meteor.methods({
 		if(!Meteor.userId()) {
 			throw new Meteor.Error('Not authorized')
 		}
-		
+			let dateTokens = date.split("-");
+			let dateYear = parseInt(dateTokens[0]);
+			let dateMonth = parseInt(dateTokens[1]) - 1; //BSON month is 0 based
+			let dateDay = parseInt(dateTokens[2]);
+
 			Jobs.insert({
 				invoice: parseInt(invoice),
-				date: date,
+				date: new Date(dateYear, dateMonth, dateDay),
 				firstName: firstName,
 				lastName: lastName,
 				address: address,
