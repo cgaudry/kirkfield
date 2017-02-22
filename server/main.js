@@ -21,118 +21,59 @@ Meteor.startup(() => {
 		employeeId: 4,
 		employeeName: 'John'
 	});
+	
+
+	Employees.insert({
+		employeeId: 5,
+		employeeName: 'Tomas'
+	});
+	
+
+	Employees.insert({
+		employeeId: 6,
+		employeeName: 'Bobby'
+	});
 	}
 
 	if(Jobs.find().count() === 0) {
-		Jobs.insert({
-				invoice: 1,
-				date: new Date(2017, 0, 1),
+		let jobTypeArray = ['a', 'b', 'c'];
+		let vehicleIdArray = ['aaa123', 'bbb234', 'ccc345', 'ddd456'];
+
+		for (i = 1; i < 1000; i++) {
+			let jobTypeRandom = Math.floor(Math.random() * 3);
+			let monthRandom = Math.floor(Math.random() * 12);
+			let dayRandom = Math.floor((Math.random() * 32) + 1);
+			let estimateRandom = Math.random() * 10000;
+			let costRandom = Math.max(100 , (estimateRandom + ((Math.random() * 1000) - 500)));
+			let employeeRandom = (Math.random() * 6) + 1;
+			let vehicleIdRandom = Math.floor(Math.random() * 4);
+			let milageRandom = Math.floor((Math.random() * 50) + 1);
+
+			Jobs.insert({
+				invoice: i,
+				date: new Date(2017, monthRandom, dayRandom),
 				firstName: 'Billy',
 				lastName: 'Bob',
 				address: '69 Thorton Bay',
 				phoneNumber: 2045559999,
 				email: 'be@cool.ca',
-				jobTypeCode: 'a',
-				estimateCost: 1000.00,
+				jobTypeCode: jobTypeArray[jobTypeRandom],
+				estimateCost: estimateRandom,
 				estimateParts: {},
-				estimateEmployee: 1,
-				installCost: 1500.69,
+				estimateEmployee: employeeRandom,
+				installCost: costRandom,
 				installParts: {},
-				installEmployee: 1,
-				vehicleId: 'aaa123',
-				mileage: 1234,
+				installEmployee: employeeRandom,
+				vehicleId: vehicleIdArray[vehicleIdRandom],
+				mileage: milageRandom,
 				complete: false,
 				createdAt: new Date()
 				
 			});
 
-		Jobs.insert({
-				invoice: 2,
-				date: new Date(2017, 0, 2),
-				firstName: 'Joe',
-				lastName: 'Rogan',
-				address: '123 Easy Street',
-				phoneNumber: 2046668888,
-				email: 'see@cool.ca',
-				jobTypeCode: 'b',
-				estimateCost: 1500.00,
-				estimateParts: {},
-				estimateEmployee: 2,
-				installCost: 1600.25,
-				installParts: {},
-				installEmployee: 2,
-				vehicleId: 'aaa123',
-				mileage: 1234,
-				complete: false,
-				createdAt: new Date()
-				
-			});
+		}
 
-		Jobs.insert({
-				invoice: 3,
-				date: new Date(2017, 0, 3),
-				firstName: 'Joe',
-				lastName: 'Rogan',
-				address: '123 Easy Street',
-				phoneNumber: 2046668888,
-				email: 'see@cool.ca',
-				jobTypeCode: 'b',
-				estimateCost: 500.00,
-				estimateParts: {},
-				estimateEmployee: 2,
-				installCost: 620.50,
-				installParts: {},
-				installEmployee: 2,
-				vehicleId: 'aaa123',
-				mileage: 1234,
-				complete: false,
-				createdAt: new Date()
-				
-			});
-
-		Jobs.insert({
-				invoice: 4,
-				date: new Date(2017, 0, 4),
-				firstName: 'Joe',
-				lastName: 'Rogan',
-				address: '123 Easy Street',
-				phoneNumber: 2046668888,
-				email: 'see@cool.ca',
-				jobTypeCode: 'b',
-				estimateCost: 700.00,
-				estimateParts: {},
-				estimateEmployee: 3,
-				installCost: 909.50,
-				installParts: {},
-				installEmployee: 3,
-				vehicleId: 'aaa123',
-				mileage: 1234,
-				complete: false,
-				createdAt: new Date()
-				
-			});
-
-		Jobs.insert({
-				invoice: 5,
-				date: new Date(2017, 0, 5),
-				firstName: 'Joe',
-				lastName: 'Rogan',
-				address: '123 Easy Street',
-				phoneNumber: 2046668888,
-				email: 'see@cool.ca',
-				jobTypeCode: 'b',
-				estimateCost: 9500.00,
-				estimateParts: {},
-				estimateEmployee: 4,
-				installCost: 9909.50,
-				installParts: {},
-				installEmployee: 4,
-				vehicleId: 'aaa123',
-				mileage: 1234,
-				complete: false,
-				createdAt: new Date()
-				
-			});
+		
 	}
 
   

@@ -166,6 +166,7 @@ export default class JobForm extends Component {
 					<div className="col-sm-2">
 					<input 
 						type="number"
+						step="0.01"
 						className="form-control"
 						id="estimateCost"
 						ref="estimateCost"
@@ -201,6 +202,7 @@ export default class JobForm extends Component {
 					<div className="col-sm-2">
 					<input 
 						type="number"
+						step="0.01"
 						className="form-control"
 						id="installCost"
 						ref="installCost"
