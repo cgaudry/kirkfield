@@ -12,9 +12,7 @@ export default class EmployeeSingle extends Component {
 				<td>
 					<a href={`/employee/${this.props.employee._id}`}>{this.props.employee.employeeId}</a>
 				</td>
-				<td>
-					{this.props.employee.employeeId} 
-				</td>
+				
 				<td>
 					{this.props.employee.employeeName}
 				</td>

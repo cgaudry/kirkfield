@@ -22,3 +22,12 @@ Meteor.publish("allVehicles", function() {
 Meteor.publish("allEmployees", function() {
 	return Employees.find();
 })
+
+Meteor.publish("dateRangeJobs", function(startDate, endDate) {
+	return Jobs.find({
+		date:{
+			$gte: startDate,
+			$lt: endDate
+		}
+	});
+})

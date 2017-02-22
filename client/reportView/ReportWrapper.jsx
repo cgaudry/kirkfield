@@ -13,7 +13,12 @@ export default class ReportWrapper extends TrackerReact(React.Component) {
 	constructor() {
 		super();
 
-		this.state = {value: ''};
+		this.state = {
+			value: '',
+			subscription: {
+				jobs: Meteor.subscribe("allJobs")
+			}
+		};
 		
 		this.handleChange = this.handleChange.bind(this);
 		this.handleSubmit = this.handleSubmit.bind(this);

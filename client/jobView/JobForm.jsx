@@ -5,6 +5,7 @@ export default class JobForm extends Component {
 	addJob(event) {
 		event.preventDefault();
 		let invoice = this.refs.invoice.value.trim();
+		let date = this.refs.date.value.trim();
 		let firstName = this.refs.firstName.value.trim();
 		let lastName = this.refs.lastName.value.trim();
 		let address = this.refs.address.value.trim();
@@ -23,12 +24,13 @@ export default class JobForm extends Component {
 
 		//add further input validation rules here
 		if(invoice) {
-			Meteor.call('addJob', invoice, firstName, lastName, address, phoneNumber, email, jobTypeCode,
+			Meteor.call('addJob', invoice, date, firstName, lastName, address, phoneNumber, email, jobTypeCode,
 			estimateCost, estimateParts, estimateEmployee, installCost, installParts, installEmployee, vehicleId, mileage, (error, data) => {
 			if(error) {
 				Bert.alert('Please login before submitting', 'danger', 'fixed-top', 'fa-frown-o');
 			} else {
 			this.refs.invoice.value = "";
+			this.refs.date.value = "";
 			this.refs.firstName.value = "";
 			this.refs.lastName.value = "";
 			this.refs.address.value = "";
@@ -64,6 +66,19 @@ export default class JobForm extends Component {
 						id="invoiceNumber"
 						ref="invoice"
 						placeholder="Invoice"
+					/>
+					</div>
+				</div>
+
+				<div className="form-group">
+					<label className="control-label col-sm-2" htmlFor="invoiceNumber">Date:</label>
+					<div className="col-sm-10">
+					<input 
+						type="date" 
+						className="form-control"
+						id="date"
+						ref="date"
+						placeholder="Date"
 					/>
 					</div>
 				</div>
@@ -111,7 +126,7 @@ export default class JobForm extends Component {
 					<label className="control-label col-sm-2" htmlFor="phoneNumber">Phone Number:</label>
 					<div className="col-sm-4">
 					<input 
-						type="number"
+						type="text"
 						className="form-control"
 						id="phoneNumber"
 						ref="phoneNumber"
@@ -151,6 +166,7 @@ export default class JobForm extends Component {
 					<div className="col-sm-2">
 					<input 
 						type="number"
+						step="0.01"
 						className="form-control"
 						id="estimateCost"
 						ref="estimateCost"
@@ -172,7 +188,7 @@ export default class JobForm extends Component {
 					<label className="control-label col-sm-2" htmlFor="estimateEmployee">Estimate Employee:</label>
 					<div className="col-sm-2">
 					<input 
-						type="text"
+						type="number"
 						className="form-control"
 						id="estimateEmployee"
 						ref="estimateEmployee"
@@ -186,6 +202,7 @@ export default class JobForm extends Component {
 					<div className="col-sm-2">
 					<input 
 						type="number"
+						step="0.01"
 						className="form-control"
 						id="installCost"
 						ref="installCost"
@@ -207,7 +224,7 @@ export default class JobForm extends Component {
 					<label className="control-label col-sm-2" htmlFor="installEmployee">Install Employee:</label>
 					<div className="col-sm-2">
 					<input 
-						type="text"
+						type="number"
 						className="form-control"
 						id="installEmployee"
 						ref="installEmployee"
