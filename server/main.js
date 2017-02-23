@@ -43,9 +43,9 @@ Meteor.startup(() => {
 			let jobTypeRandom = Math.floor(Math.random() * 3);
 			let monthRandom = Math.floor(Math.random() * 12);
 			let dayRandom = Math.floor((Math.random() * 32) + 1);
-			let estimateRandom = Math.random() * 10000;
-			let costRandom = Math.max(100 , (estimateRandom + ((Math.random() * 1000) - 500)));
-			let employeeRandom = (Math.random() * 6) + 1;
+			let estimateRandom = parseFloat(parseFloat(Math.random() * 10000).toFixed(2));
+			let costRandom = parseFloat(parseFloat(Math.max(100 , (estimateRandom + ((Math.random() * 1000) - 500)))).toFixed(2));
+			let employeeRandom = Math.floor((Math.random() * 6) + 1);
 			let vehicleIdRandom = Math.floor(Math.random() * 4);
 			let milageRandom = Math.floor((Math.random() * 50) + 1);
 

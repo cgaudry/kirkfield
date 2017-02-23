@@ -54,7 +54,7 @@ export default class JobForm extends Component {
 	
 	render() {
 		let vehicles = this.props.vehicles;
-		console.log(vehicles);
+		//console.log(vehicles);
 		return(
 			<form className="form-horizontal" onSubmit={this.addJob.bind(this)}>
 				<div className="form-group">
