@@ -8,7 +8,7 @@ class DataTable extends React.Component {
 	
 	render() {
 		return (<Table	
-						rowsCount={this.props.recent.length}
+						rowsCount={this.props.data.length}
 						rowHeight={this.props.rowHeight}
 						headerHeight={this.props.rowHeight}
 						width={this.props.containerWidth}
@@ -21,7 +21,7 @@ class DataTable extends React.Component {
 									header={<Cell>{this.props.columnNames[this.props.columns.indexOf(col)]}</Cell>}
 									cell={props => (
 									<Cell {...props}>
-										{this.props.recent[props.rowIndex][col]}
+										{this.props.data[props.rowIndex][col]}
 									</Cell>
 									)}
 								flexgrow={1}
