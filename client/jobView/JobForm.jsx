@@ -2,6 +2,21 @@ import React, {Component} from 'react';
 
 export default class JobForm extends Component {
 
+	constructor() {
+		super();
+		this.state = {
+			installItems: [{itemKey:1}, {itemKey:2}, {itemKey:3}]
+		};
+	}
+	
+	addInstallItem() {
+		this.setState(function(prevState, props) {
+			return {
+				installItems: prevState.installItems
+			};
+		});
+	}
+	
 	addJob(event) {
 		event.preventDefault();
 		let invoice = this.refs.invoice.value.trim();
@@ -197,7 +212,10 @@ export default class JobForm extends Component {
 					</div>
 				</div>
 				
-				<div className="form-group">
+				<div className="well">
+				<h3>Install</h3>
+				
+					<div className="form-group">
 					<label className="control-label col-sm-2" htmlFor="installCost">Install Cost:</label>
 					<div className="col-sm-2">
 					<input 
@@ -231,6 +249,28 @@ export default class JobForm extends Component {
 						placeholder="Install Employee"
 					/>
 					</div>
+					</div>
+					{console.log(this.state.installItems)}
+					{this.state.installItems.map( (installItem) => {
+						return 	<div className="form-group" key={installItem.itemKey}>
+									<label className="control-label col-sm-2" htmlFor="installItem">Install Item:</label>
+									<div className="col-sm-2">
+										<input
+											type="text"
+											className="form-control"
+											id=""
+											ref=""
+											placeholder="Install Item"
+										/>
+									</div>
+								</div>
+					})}
+					
+					<button className="btn btn-primary"
+						onClick={this.addInstallItem.bind(this)}>
+						Add Install Item <span className="glyphicon glyphicon-plus-sign"></span>
+					</button>
+
 				</div>
 				
 				<div className="form-group">
