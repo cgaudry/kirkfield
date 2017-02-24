@@ -22,7 +22,7 @@ export default class JobSingle extends Component {
 				onClick={this.toggleChecked.bind(this)} />
 
 				<a href={`/job/${this.props.jobItem._id}`}>
-					Inovice - {this.props.jobItem.invoice} Quantity -  {this.props.jobItem.jobTypeCode}
+					Inovice - {this.props.jobItem.invoice} Job Type -  {this.props.jobItem.jobTypeCode} Employee - {this.props.jobItem.installEmployee} Estimate - {this.props.jobItem.estimateCost} Actual - {this.props.jobItem.installCost}
 				</a>
 
 				{status}
