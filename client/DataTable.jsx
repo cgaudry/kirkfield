@@ -6,7 +6,61 @@ import {Table, Column, Cell} from 'fixed-data-table';
 
 class DataTable extends React.Component {
 	
+	deleteVehicle() {
+		Meteor.call('deleteVehicle', this);
+	}
+	
+	editVehicle() {
+		Meteor.call('editVehicle', this);
+	}
+	
 	render() {
+		let columnCount = this.props.columns.length;
+		if (this.props.deleteButtons) {
+			columnCount++;
+		}
+		if (this.props.editButtons) {
+			columnCount++;
+		}
+		
+		let columnWidth = this.props.containerWidth / columnCount;
+		
+		let deleteButtonColumn = null;
+		if (this.props.deleteButtons) {
+			deleteButtonColumn = 
+				<Column
+					key={"deleteButtons"}
+					header={<Cell>Delete</Cell>}
+					cell={props => (
+						<Cell {...props}>
+							<button className="btn btn-danger"
+								onClick={this.deleteVehicle.bind(this.props.data[props.rowIndex])}>
+								<span className="glyphicon glyphicon-trash"></span> Delete
+							</button>
+						</Cell>
+						)}
+					width={columnWidth}
+				/>;
+		}
+		
+		let editButtonColumn = null;
+		if (this.props.editButtons) {
+			editButtonColumn = 
+				<Column
+					key={"editButtons"}
+					header={<Cell>Edit</Cell>}
+					cell={props => (
+						<Cell {...props}>
+							<button className="btn btn-warning"
+								onClick={this.editVehicle.bind(this.props.data[props.rowIndex])}>
+								<span className="glyphicon glyphicon-pencil"></span> Edit
+							</button>
+						</Cell>
+						)}
+					width={columnWidth}
+				/>;
+		}
+		
 		return (<Table	
 						rowsCount={this.props.data.length}
 						rowHeight={this.props.rowHeight}
@@ -25,15 +79,16 @@ class DataTable extends React.Component {
 									</Cell>
 									)}
 								flexgrow={1}
-								width={this.props.containerWidth / this.props.columns.length}/>
+								width={columnWidth}/>
 							}
 						)}
+						{editButtonColumn}
+						{deleteButtonColumn}
 					</Table>)
 	}
 }
 export default Dimensions({
 	getWidth: function(element) {
-		console.log(element.parentElement.getBoundingClientRect());
 		return element.parentElement.getBoundingClientRect().width * .8;
 	},
 	getHeight: function(element) {

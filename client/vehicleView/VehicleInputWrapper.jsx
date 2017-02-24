@@ -50,22 +50,10 @@ export default class VehicleInputWrapper extends TrackerReact(React.Component) {
 						rowHeight={tableRowHeight}
 						columns={['vehicleName', 'vehicleModelYear', 'vehicleMake', 'vehicleModel', 'licensePlate']}
 						columnNames={['Vehicle Name', 'Model Year', 'Make', 'Model', 'License Plate']}
+						deleteButtons={true}
+						editButtons={true}
 						data={this.state.vehicles}
 					/>
-					<table className="table">
-						<thead>
-							<tr>
-								<td>Item Id</td>
-								<td>Item Name</td>
-								<td>Item Quantity</td>
-							</tr>
-						</thead>
-						<tbody>
-						{this.vehicles().map( (vehicles) => {
-							return <VehicleSingle key={vehicles._id} vehicle={vehicles} />
-						})}
-						</tbody>
-					</table>
 				</div>
 				</div>
 			</div>
