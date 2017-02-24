@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {Inventory} from './../inventoryView/InventoryInputWrapper.jsx';
+import {Employees} from './../employeeView/EmployeeInputWrapper.jsx';
 
 export default class JobForm extends Component {
 
@@ -7,7 +8,8 @@ export default class JobForm extends Component {
 		super();
 		this.state = {
 			subscription: {
-				inventory: Meteor.subscribe("allInventory")
+				inventory: Meteor.subscribe("allInventory"),
+				employees: Meteor.subscribe("allEmployees")
 			},
 			installItems: [{key:0}]
 		};
@@ -15,10 +17,15 @@ export default class JobForm extends Component {
 	
 	componentWillUnmount() {
 		this.state.subscription.inventory.stop();
+		this.state.subscription.employees.stop();
 	}
 
 	inventoryItems() {
 		return Inventory.find().fetch();
+	}
+	
+	employees() {
+		return Employees.find().fetch();
 	}
 	
 	addInstallItem() {
@@ -216,13 +223,20 @@ export default class JobForm extends Component {
 					
 					<label className="control-label col-sm-2" htmlFor="estimateEmployee">Estimate Employee:</label>
 					<div className="col-sm-2">
-					<input 
-						type="number"
+					<select
 						className="form-control"
 						id="estimateEmployee"
 						ref="estimateEmployee"
-						placeholder="Estimate Employee"
-					/>
+					>
+						{this.employees().map( (employee) => {
+							return <option
+										key={employee._id}
+										value={employee.employeeName}
+									>
+									{employee.employeeName}
+									</option>
+						})}
+					</select>
 					</div>
 				</div>
 				
@@ -255,13 +269,20 @@ export default class JobForm extends Component {
 					
 					<label className="control-label col-sm-2" htmlFor="installEmployee">Install Employee:</label>
 					<div className="col-sm-2">
-					<input 
-						type="number"
+					<select
 						className="form-control"
 						id="installEmployee"
 						ref="installEmployee"
-						placeholder="Install Employee"
-					/>
+					>
+						{this.employees().map( (employee) => {
+							return <option
+										key={employee._id}
+										value={employee.employeeName}
+									>
+									{employee.employeeName}
+									</option>
+						})}
+					</select>
 					</div>
 					</div>
 					
@@ -269,7 +290,7 @@ export default class JobForm extends Component {
 					
 						let formElementId = 'installItem' + installItem.key;
 						
-						return 	<div className="form-group" key={installItem.key}>
+						return 	<div className="form-group" key={formElementId}>
 									<label className="control-label col-sm-2" htmlFor={formElementId + 'name'}>Install Item:</label>
 									<div className="col-sm-2">
 										<input 
