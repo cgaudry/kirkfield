@@ -98,7 +98,7 @@ export default class VehicleForm extends Component {
 					<input 
 						className="form-control"
 						id="licensePlate"
-						type="number" 
+						type="text" 
 						ref="licensePlate"
 						placeholder="License Plate"
 					/>

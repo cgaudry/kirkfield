@@ -6,7 +6,7 @@ import GetContainerDimensions from 'react-dimensions'
 import {Table, Column, Cell} from 'fixed-data-table';
 import InventoryForm from './InventoryForm.jsx';
 import InventorySingle from './InventorySingle.jsx';
-import DataTable from './DataTable.jsx';
+import DataTable from './../DataTable.jsx';
 
 Inventory = new Mongo.Collection("inventory");
 
@@ -28,7 +28,7 @@ export default class InventoryInputWrapper extends TrackerReact(React.Component)
 	inventoryItems() {
 		return Inventory.find().fetch();
 	}
-
+	
 	recent() {
 		return Inventory.find();
 	}
@@ -56,7 +56,7 @@ export default class InventoryInputWrapper extends TrackerReact(React.Component)
 						rowHeight={tableRowHeight}
 						columns={['inventoryItemId', 'inventoryItemName', 'inventoryItemQuantity']}
 						columnNames={['Item Id', 'Item Name', 'Quantity']}
-						recent={this.state.recent}
+						data={this.state.recent}
 					/>
 				</div>
 				</div>

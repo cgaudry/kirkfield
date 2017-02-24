@@ -4,7 +4,7 @@ import TrackerReact from 'meteor/ultimatejs:tracker-react';
 
 import VehicleForm from './VehicleForm.jsx';
 import VehicleSingle from './VehicleSingle.jsx';
-
+import DataTable from './../DataTable.jsx';
 
 export const Vehicles = new Mongo.Collection("vehicles");
 
@@ -28,7 +28,8 @@ export default class VehicleInputWrapper extends TrackerReact(React.Component) {
 	}
 
 	render() {
-		
+		this.state.vehicles = this.vehicles();
+		let tableRowHeight = 50;
 		return(
 			<div>
 				<div className="panel panel-primary">
@@ -45,20 +46,15 @@ export default class VehicleInputWrapper extends TrackerReact(React.Component) {
 					<h1>Recently Added Vehicles</h1>
 				</div>
 				<div className="panel-body">
-					<table className="table">
-						<thead>
-							<tr>
-								<td>Item Id</td>
-								<td>Item Name</td>
-								<td>Item Quantity</td>
-							</tr>
-						</thead>
-						<tbody>
-						{this.vehicles().map( (vehicles) => {
-							return <VehicleSingle key={vehicles._id} vehicle={vehicles} />
-						})}
-						</tbody>
-					</table>
+					<DataTable 
+						rowHeight={tableRowHeight}
+						columns={['vehicleName', 'vehicleModelYear', 'vehicleMake', 'vehicleModel', 'licensePlate']}
+						columnNames={['Vehicle Name', 'Model Year', 'Make', 'Model', 'License Plate']}
+						deleteButtons={true}
+						deleteFunction={'deleteVehicle'}
+						editButtons={true}
+						data={this.state.vehicles}
+					/>
 				</div>
 				</div>
 			</div>
