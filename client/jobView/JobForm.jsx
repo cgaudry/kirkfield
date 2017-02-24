@@ -1,18 +1,32 @@
 import React, {Component} from 'react';
+import {Inventory} from './../inventoryView/InventoryInputWrapper.jsx';
 
 export default class JobForm extends Component {
 
 	constructor() {
 		super();
 		this.state = {
-			installItems: [{itemKey:1}, {itemKey:2}, {itemKey:3}]
+			subscription: {
+				inventory: Meteor.subscribe("allInventory")
+			},
+			installItems: [{key:0}]
 		};
+	}
+	
+	componentWillUnmount() {
+		this.state.subscription.inventory.stop();
+	}
+
+	inventoryItems() {
+		return Inventory.find().fetch();
 	}
 	
 	addInstallItem() {
 		this.setState(function(prevState, props) {
+			let newInstallItems = prevState.installItems
+			newInstallItems.push({key: newInstallItems.length});
 			return {
-				installItems: prevState.installItems
+				installItems: newInstallItems
 			};
 		});
 	}
@@ -250,17 +264,40 @@ export default class JobForm extends Component {
 					/>
 					</div>
 					</div>
-					{console.log(this.state.installItems)}
+					
 					{this.state.installItems.map( (installItem) => {
-						return 	<div className="form-group" key={installItem.itemKey}>
-									<label className="control-label col-sm-2" htmlFor="installItem">Install Item:</label>
+					
+						let formElementId = 'installItem' + installItem.key;
+						
+						return 	<div className="form-group" key={installItem.key}>
+									<label className="control-label col-sm-2" htmlFor={formElementId + 'name'}>Install Item:</label>
 									<div className="col-sm-2">
-										<input
-											type="text"
+										<input 
+											list={formElementId + 'name'}
 											className="form-control"
-											id=""
-											ref=""
 											placeholder="Install Item"
+										/>
+										<datalist id={formElementId + 'name'}>
+											{this.inventoryItems().map( (item) => {
+												return <option
+															key={item._id}
+															value={item.inventoryItemName}/>
+											})}
+										</datalist>
+									</div>
+									
+									<label 
+										className="control-label col-sm-3"
+										htmlFor={formElementId + 'quantity'}>
+										Install Item Quantity:
+									</label>
+									<div className="col-sm-3">
+										<input
+											type="number"
+											className="form-control"
+											id={formElementId + 'quantity'}
+											ref={formElementId + 'quantity'}
+											placeholder="Install Item Quantity"
 										/>
 									</div>
 								</div>
