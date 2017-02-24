@@ -4,14 +4,14 @@ import TrackerReact from 'meteor/ultimatejs:tracker-react';
 import Dimensions from 'react-dimensions'
 import {Table, Column, Cell} from 'fixed-data-table';
 
-class DataTable extends React.Component {
+class DataTable extends TrackerReact(React.Component) {
 	
-	deleteVehicle() {
-		Meteor.call('deleteVehicle', this);
+	deleteButton(rowIndex) {
+		Meteor.call(this.props.deleteFunction, this.props.data[rowIndex]);
 	}
 	
-	editVehicle() {
-		Meteor.call('editVehicle', this);
+	editButton(rowIndex) {
+		Meteor.call(this.props.editFunction, this.props.data[rowIndex]);
 	}
 	
 	render() {
@@ -34,7 +34,7 @@ class DataTable extends React.Component {
 					cell={props => (
 						<Cell {...props}>
 							<button className="btn btn-danger"
-								onClick={this.deleteVehicle.bind(this.props.data[props.rowIndex])}>
+								onClick={() => {this.deleteButton(props.rowIndex)}}>
 								<span className="glyphicon glyphicon-trash"></span> Delete
 							</button>
 						</Cell>
@@ -52,7 +52,7 @@ class DataTable extends React.Component {
 					cell={props => (
 						<Cell {...props}>
 							<button className="btn btn-warning"
-								onClick={this.editVehicle.bind(this.props.data[props.rowIndex])}>
+								onClick={() => {this.editButton(props.rowIndex)}}>
 								<span className="glyphicon glyphicon-pencil"></span> Edit
 							</button>
 						</Cell>

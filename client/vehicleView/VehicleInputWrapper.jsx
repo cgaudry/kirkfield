@@ -51,6 +51,7 @@ export default class VehicleInputWrapper extends TrackerReact(React.Component) {
 						columns={['vehicleName', 'vehicleModelYear', 'vehicleMake', 'vehicleModel', 'licensePlate']}
 						columnNames={['Vehicle Name', 'Model Year', 'Make', 'Model', 'License Plate']}
 						deleteButtons={true}
+						deleteFunction={'deleteVehicle'}
 						editButtons={true}
 						data={this.state.vehicles}
 					/>
