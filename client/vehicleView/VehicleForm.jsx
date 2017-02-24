@@ -10,10 +10,12 @@ export default class VehicleForm extends Component {
 		let vehicleModel = this.refs.vehicleModel.value.trim();
 		let vehicleModelYear = this.refs.vehicleModelYear.value.trim();
 		let licensePlate = this.refs.licensePlate.value.trim();
+		let color = this.refs.vehicleColor.value.trim();
+		let initialMileage = this.refs.initialMileage.value.trim();
 		//add further input validation rules here
 		if(vehicleId) {
 			Meteor.call('addVehicle', vehicleId, vehicleName, vehicleMake,
-				vehicleModel, vehicleModelYear, licensePlate, (error, data) => {
+				vehicleModel, vehicleModelYear, licensePlate, color, initialMileage, (error, data) => {
 			if(error) {
 				Bert.alert('Please login before submitting', 'danger', 'fixed-top', 'fa-frown-o');
 			} else {
@@ -23,6 +25,8 @@ export default class VehicleForm extends Component {
 			this.refs.vehicleModel.value = "";
 			this.refs.vehicleModelYear.value = "";
 			this.refs.licensePlate = "";
+			this.refs.color = "";
+			this.refs.initialMileage = 50000;
 			}
 		});
 		}
