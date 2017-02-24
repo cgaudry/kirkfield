@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import TrackerReact from 'meteor/ultimatejs:tracker-react';
 
 import TestReport from './reportTypes/TestReport';
+import ReportA from './reportTypes/ReportA';
 
 
 
@@ -46,6 +47,8 @@ export default class ReportWrapper extends TrackerReact(React.Component) {
 
 		if(reportType == 'TestReport')
 			return(<TestReport />)
+		if(reportType == 'ReportA')
+			return(<ReportA />)
 		
 		
 	}
@@ -61,6 +64,7 @@ export default class ReportWrapper extends TrackerReact(React.Component) {
 						Chose report:
 						<select value={this.state.value} onChange={this.handleChange}>
 							<option value=""> </option>
+							<option value="ReportA">Report A</option>
 							<option value="TestReport">Test Report</option>
 							<option value="report2">Report 2</option>
 							<option value="report3">Report 3</option>
