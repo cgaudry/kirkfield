@@ -1,7 +1,43 @@
 import React, {Component} from 'react';
+import {Inventory} from './../inventoryView/InventoryInputWrapper.jsx';
+import {Employees} from './../employeeView/EmployeeInputWrapper.jsx';
 
 export default class JobForm extends Component {
 
+	constructor() {
+		super();
+		this.state = {
+			subscription: {
+				inventory: Meteor.subscribe("allInventory"),
+				employees: Meteor.subscribe("allEmployees")
+			},
+			installItems: [{key:0}]
+		};
+	}
+	
+	componentWillUnmount() {
+		this.state.subscription.inventory.stop();
+		this.state.subscription.employees.stop();
+	}
+
+	inventoryItems() {
+		return Inventory.find().fetch();
+	}
+	
+	employees() {
+		return Employees.find().fetch();
+	}
+	
+	addInstallItem() {
+		this.setState(function(prevState, props) {
+			let newInstallItems = prevState.installItems
+			newInstallItems.push({key: newInstallItems.length});
+			return {
+				installItems: newInstallItems
+			};
+		});
+	}
+	
 	addJob(event) {
 		event.preventDefault();
 		let invoice = this.refs.invoice.value.trim();
@@ -187,17 +223,27 @@ export default class JobForm extends Component {
 					
 					<label className="control-label col-sm-2" htmlFor="estimateEmployee">Estimate Employee:</label>
 					<div className="col-sm-2">
-					<input 
-						type="number"
+					<select
 						className="form-control"
 						id="estimateEmployee"
 						ref="estimateEmployee"
-						placeholder="Estimate Employee"
-					/>
+					>
+						{this.employees().map( (employee) => {
+							return <option
+										key={employee._id}
+										value={employee.employeeName}
+									>
+									{employee.employeeName}
+									</option>
+						})}
+					</select>
 					</div>
 				</div>
 				
-				<div className="form-group">
+				<div className="well">
+				<h3>Install</h3>
+				
+					<div className="form-group">
 					<label className="control-label col-sm-2" htmlFor="installCost">Install Cost:</label>
 					<div className="col-sm-2">
 					<input 
@@ -223,14 +269,66 @@ export default class JobForm extends Component {
 					
 					<label className="control-label col-sm-2" htmlFor="installEmployee">Install Employee:</label>
 					<div className="col-sm-2">
-					<input 
-						type="number"
+					<select
 						className="form-control"
 						id="installEmployee"
 						ref="installEmployee"
-						placeholder="Install Employee"
-					/>
+					>
+						{this.employees().map( (employee) => {
+							return <option
+										key={employee._id}
+										value={employee.employeeName}
+									>
+									{employee.employeeName}
+									</option>
+						})}
+					</select>
 					</div>
+					</div>
+					
+					{this.state.installItems.map( (installItem) => {
+					
+						let formElementId = 'installItem' + installItem.key;
+						
+						return 	<div className="form-group" key={formElementId}>
+									<label className="control-label col-sm-2" htmlFor={formElementId + 'name'}>Install Item:</label>
+									<div className="col-sm-2">
+										<input 
+											list={formElementId + 'name'}
+											className="form-control"
+											placeholder="Install Item"
+										/>
+										<datalist id={formElementId + 'name'}>
+											{this.inventoryItems().map( (item) => {
+												return <option
+															key={item._id}
+															value={item.inventoryItemName}/>
+											})}
+										</datalist>
+									</div>
+									
+									<label 
+										className="control-label col-sm-3"
+										htmlFor={formElementId + 'quantity'}>
+										Install Item Quantity:
+									</label>
+									<div className="col-sm-3">
+										<input
+											type="number"
+											className="form-control"
+											id={formElementId + 'quantity'}
+											ref={formElementId + 'quantity'}
+											placeholder="Install Item Quantity"
+										/>
+									</div>
+								</div>
+					})}
+					
+					<button className="btn btn-primary"
+						onClick={this.addInstallItem.bind(this)}>
+						Add Install Item <span className="glyphicon glyphicon-plus-sign"></span>
+					</button>
+
 				</div>
 				
 				<div className="form-group">
