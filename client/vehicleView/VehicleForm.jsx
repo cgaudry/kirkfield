@@ -56,9 +56,11 @@ export default class VehicleForm extends Component {
 					/>
 					</div>
 					</div>
+					
 					<div className="form-group">
+					
 					<label className="control-label col-sm-2" htmlFor="vehicleMake">Make:</label>
-					<div className="col-sm-10">
+					<div className="col-sm-2">
 					<input 
 						className="form-control"
 						id="vehicleMake"
@@ -67,10 +69,9 @@ export default class VehicleForm extends Component {
 						placeholder="Make"
 					/>
 					</div>
-					</div>
-					<div className="form-group">
+					
 					<label className="control-label col-sm-2" htmlFor="vehicleModel">Model:</label>
-					<div className="col-sm-10">
+					<div className="col-sm-2">
 					<input 
 						className="form-control"
 						id="vehicleModel"
@@ -79,22 +80,25 @@ export default class VehicleForm extends Component {
 						placeholder="Model"
 					/>
 					</div>
-					</div>
-					<div className="form-group">
+					
 					<label className="control-label col-sm-2" htmlFor="vehicleModelYear">Model Year:</label>
-					<div className="col-sm-10">
+					<div className="col-sm-2">
 					<input 
 						className="form-control"
 						id="vehicleModelYear"
 						type="number" 
 						ref="vehicleModelYear"
 						placeholder="Model Year"
+						defaultValue={new Date().getFullYear()}
 					/>
 					</div>
+					
 					</div>
+					
 					<div className="form-group">
+					
 					<label className="control-label col-sm-2" htmlFor="licensePlate">License Plate:</label>
-					<div className="col-sm-10">
+					<div className="col-sm-2">
 					<input 
 						className="form-control"
 						id="licensePlate"
@@ -103,6 +107,29 @@ export default class VehicleForm extends Component {
 						placeholder="License Plate"
 					/>
 					</div>
+					
+					<label className="control-label col-sm-2" htmlFor="vehicleColor">Color:</label>
+					<div className="col-sm-2">
+					<input
+						className="form-control"
+						id="vehicleColor"
+						type="text"
+						ref="vehicleColor"
+						placeholder="Color"
+					/>
+					</div>
+					
+					<label className="control-label col-sm-2" htmlFor="initialMileage">Mileage:</label>
+					<div className="col-sm-2">
+					<input
+						className="form-control"
+						id="initialMileage"
+						type="number"
+						ref="initialMileage"
+						defaultValue={50000}
+					/>
+					</div>
+					
 					</div>
 					<input type="submit" className="btn btn-primary pull-right"/>
 				</form>
