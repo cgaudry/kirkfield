@@ -8,15 +8,15 @@ export default class EmployeeSingle extends Component {
 
 	render() {
 		return (
-			<tr>
-				<td>
+			<div>
+				<div>
 					<a href={`/employee/${this.props.employee._id}`}>{this.props.employee.employeeId}</a>
-				</td>
+				</div>
 				
-				<td>
+				<div>
 					{this.props.employee.employeeName}
-				</td>
-				<td>
+				</div>
+				<div>
 					<div className="btn-group">
 					<button className="btn btn-warning">
 						<span className="glyphicon glyphicon-pencil"></span> Edit
@@ -27,8 +27,8 @@ export default class EmployeeSingle extends Component {
 						<span className="glyphicon glyphicon-trash"></span> Delete
 					</button>
 					</div>
-				</td>
-			</tr>
+				</div>
+			</div>
 		)
 	}
 }
