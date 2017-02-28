@@ -54,7 +54,7 @@ export default class EmployeeInputWrapper extends TrackerReact(React.Component) 
 								<h4 className="panel-title">
 									<a 	data-toggle="collapse"
 										data-parent="#employeeAccordion" 
-										href={"#collapse" + employees._id}>{employees.employeeName}
+										href={"#collapse" + employees._id}>{employees.employeeFirstName}
 									</a>
 								</h4>
 							</div>

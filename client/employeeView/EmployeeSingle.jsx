@@ -14,7 +14,7 @@ export default class EmployeeSingle extends Component {
 				</div>
 				
 				<div>
-					{this.props.employee.employeeName}
+					{this.props.employee.employeeFirstName}
 				</div>
 				<div>
 					<div className="btn-group">
