@@ -23,6 +23,7 @@ export default class EmployeeSingle extends Component {
 						Last Name: {this.props.employee.employeeLastName}
 					</li>
 					<li className="list-group-item">
+						Start Date: {this.props.employee.employeeStartDate.toString()}
 					</li>
 					<li className="list-group-item">
 						Experience: {this.props.employee.employeeExperience} Years
@@ -32,6 +33,7 @@ export default class EmployeeSingle extends Component {
 					</li>
 				</ul>
 					
+				<div className="btn-group pull-right">
 					<button className="btn btn-warning">
 						<span className="glyphicon glyphicon-pencil"></span> Edit
 					</button>
