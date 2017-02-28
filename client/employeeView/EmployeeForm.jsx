@@ -5,15 +5,25 @@ export default class EmployeeForm extends Component {
 	addEmployee(event) {
 		event.preventDefault();
 		let employeeId = this.refs.employeeId.value.trim();
-		let employeeName = this.refs.employeeName.value.trim();
+		let employeeFirstName = this.refs.employeeFirstName.value.trim();
+		let employeeLastName = this.refs.employeeLastName.value.trim();
+		let employeeStartDate = this.refs.employeeStartDate.value.trim();
+		let employeeExperience = this.refs.employeeExperience.value.trim();
+		let employeeHourlyRate = this.refs.employeeHourlyRate.value.trim();
 		
 		if(employeeId) {
-			Meteor.call('addEmployee', employeeId, employeeName, (error, data) => {
+			Meteor.call('addEmployee', employeeId, employeeFirstName, 
+				employeeLastName, employeeStartDate, employeeExperience, 
+				employeeHourlyRate, (error, data) => {
 			if(error) {
 				Bert.alert('Please login before submitting', 'danger', 'fixed-top', 'fa-frown-o');
 			} else {
 			this.refs.employeeId.value = "";
-			this.refs.employeeName.value = "";
+			this.refs.employeeFirstName.value = "";
+			this.refs.employeeLastName = ""
+			this.refs.employeeStartDate = ""
+			this.refs.employeeExperience = ""
+			this.refs.employeeHourlyRate = ""
 			}
 		});
 		}
