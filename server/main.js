@@ -76,5 +76,33 @@ Meteor.startup(() => {
 		
 	}
 
+	if(Inventory.find().count() === 0) {
+		let itemTypeArray = ['a', 'b', 'c'];
+
+		for (i = 1; i < 1000; i++) {
+			let itemTypeRandom = Math.floor(Math.random() * 3);
+			let quantityRandom = Math.floor(Math.random() * 50);
+			let modelNumRandom = parseFloat(parseFloat(Math.random() * 10000).toFixed(2));
+			let serialNumRandom = parseFloat(parseFloat(Math.random() * 10000).toFixed(2));
+			let costRandom = parseFloat(parseFloat(Math.random() * 100).toFixed(2) + 50);
+
+			Inventory.insert({
+				inventoryItemId: i,
+				inventoryItemName: 'Placeholder Item',
+				inventoryItemQuantity: quantityRandom,
+				make: 'Plaecholder Make',
+				model: modelNumRandom,
+				serialNum: serialNumRandom,
+				itemTypeCode: itemTypeArray[itemTypeRandom],
+				unitPrice: costRandom,
+				createdAt: new Date()
+				
+			});
+
+		}
+
+		
+	}
+
   
 });
