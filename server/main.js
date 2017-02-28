@@ -16,7 +16,7 @@ Meteor.startup(() => {
 			employeeLastName: lastNameArray[i],
 			employeeStartDate: new Date(yearRandom, monthRandom, dayRandom),
 			employeeExperience: (2017 - yearRandom) + Math.floor((Math.random() * 20)),
-			employeePayRate: Math.floor((Math.random() * 3)) * 5 + 15,
+			employeeHourlyRate: Math.floor((Math.random() * 3)  * 5) + 15,
 			createdAt: new Date()
 		});
 	}

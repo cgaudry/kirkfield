@@ -141,7 +141,7 @@ Meteor.methods({
 			employeeStartDate: employeeStartDate,
 			employeeEndDate: null,
 			employeeExperience: employeeExperience,
-			employeeHourlyRate,
+			employeeHourlyRate: employeeHourlyRate,
 			createdAt: new Date(),
 			user: Meteor.userId()
 		})
