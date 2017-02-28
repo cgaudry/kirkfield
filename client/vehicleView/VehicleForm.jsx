@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
-
 export default class VehicleForm extends Component {
+
 
 	addVehicle(event) {
 		event.preventDefault();
@@ -10,8 +10,18 @@ export default class VehicleForm extends Component {
 		let vehicleModel = this.refs.vehicleModel.value.trim();
 		let vehicleModelYear = this.refs.vehicleModelYear.value.trim();
 		let licensePlate = this.refs.licensePlate.value.trim();
+		let validInput = true;
 		//add further input validation rules here
 		if(vehicleId) {
+			if (!parseInt(vehicleId)) {
+				Bert.alert('id must be a number', 'danger', 'fixed-top', 'fa-frown-o');
+				validInput = false;
+			}
+			if (vehicleModelYear < 0) {
+				Bert.alert('year can\'t be negative', 'danger', 'fixed-top', 'fa-frown-o');
+				validInput = false;
+			}
+		if (validInput) {
 			Meteor.call('addVehicle', vehicleId, vehicleName, vehicleMake,
 				vehicleModel, vehicleModelYear, licensePlate, (error, data) => {
 			if(error) {
@@ -22,10 +32,10 @@ export default class VehicleForm extends Component {
 			this.refs.vehicleMake.value = "";
 			this.refs.vehicleModel.value = "";
 			this.refs.vehicleModelYear.value = "";
-			this.refs.licensePlate = "";
+			this.refs.licensePlate.value = "";
 			}
 		});
-		}
+		}}
 	}
 	
 	render() {

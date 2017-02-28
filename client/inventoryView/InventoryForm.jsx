@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import { Match, check } from 'meteor/check';
 
 export default class InventoryForm extends Component {
 
@@ -7,9 +8,18 @@ export default class InventoryForm extends Component {
 		let inventoryItemId = this.refs.inventoryItemId.value.trim();
 		let inventoryItemName = this.refs.inventoryItemName.value.trim();
 		let inventoryItemQuantity = this.refs.inventoryItemQuantity.value.trim();
-		
+		let validInput = true;
 		//add further input validation rules here
 		if(inventoryItemId) {
+			if (!parseInt(inventoryItemId)) {
+				Bert.alert('id must be a number', 'danger', 'fixed-top', 'fa-frown-o');
+				validInput = false;
+			}
+			if (inventoryItemQuantity < 0) {
+				Bert.alert('quantity can\'t be negative', 'danger', 'fixed-top', 'fa-frown-o');
+				validInput = false;
+			}
+		if (validInput) {
 			Meteor.call('addInventoryItem', inventoryItemId, inventoryItemName, inventoryItemQuantity, (error, data) => {
 			if(error) {
 				Bert.alert('Please login before submitting', 'danger', 'fixed-top', 'fa-frown-o');
@@ -19,7 +29,7 @@ export default class InventoryForm extends Component {
 			this.refs.inventoryItemQuantity.value = "";
 			}
 		});
-		}
+		}}
 
 		
 	}
