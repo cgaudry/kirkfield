@@ -60,7 +60,7 @@ export default class JobForm extends Component {
 		let installEmployee = this.refs.installEmployee.value.trim();
 		let vehicleId = this.refs.vehicleId.value.trim();
 		let mileage = this.refs.mileage.value.trim();
-		for(int i=0;i<this.state.installItems.length;i++;) {			
+		for(int i=0;i<this.state.installItems.length;i++) {			
 			console.log(this.refs.installItem + i.value);
 		}
 		console.log("installItems state length: " + this.state.installItems.length);
