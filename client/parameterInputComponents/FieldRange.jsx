@@ -10,16 +10,35 @@ export default class FormFieldRange extends Component {
 
 
 
-	handleStartDateChange(event) {
+	handleMinValueChange(event) {
 		this.props.onMinValueChange(event.target.value);
 	}
 
-	handleEndDateChange(event) {
+	handleMaxValueChange(event) {
 		this.props.onMaxValueChange(event.target.value);
 	}
 
 	render() {
 		return (
+			<div>
+					Minimum
+					<input 
+						id="minValue"
+						type="number" 
+						ref="minValue"
+						defaultValue='0'
+						onChange={this.handleMinValueChange}/>
+					-
+					<input 
+						id="maxValue"
+						type="number" 
+						ref="maxValue"
+						defaultValue='10000'
+						onChange={this.handleMaxValueChange}/>
+					Maximum
+				</div>
+				)
+		/*return (
 			<div>
 					Minimum
 					<input 
@@ -37,7 +56,7 @@ export default class FormFieldRange extends Component {
 						onChange={this.handleMaxValueChange}/>
 					Maximum
 				</div>
-				)
+				)*/
 			}				
 
 }

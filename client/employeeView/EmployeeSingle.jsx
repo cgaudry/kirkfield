@@ -8,16 +8,32 @@ export default class EmployeeSingle extends Component {
 
 	render() {
 		return (
-			<tr>
-				<td>
-					<a href={`/employee/${this.props.employee._id}`}>{this.props.employee.employeeId}</a>
-				</td>
+			<div>
 				
-				<td>
-					{this.props.employee.employeeName}
-				</td>
-				<td>
-					<div className="btn-group">
+				<ul className="list-group">
+					<li className="list-group-item">
+						<a href={`/employee/${this.props.employee._id}`}>
+							Employee Id: {this.props.employee.employeeId}
+						</a>
+					</li>
+					<li className="list-group-item">
+						First Name: {this.props.employee.employeeFirstName}
+					</li>
+					<li className="list-group-item">
+						Last Name: {this.props.employee.employeeLastName}
+					</li>
+					<li className="list-group-item">
+						Start Date: {this.props.employee.employeeStartDate.toString()}
+					</li>
+					<li className="list-group-item">
+						Experience: {this.props.employee.employeeExperience} Years
+					</li>
+					<li className="list-group-item">
+						Hourly Rate: ${this.props.employee.employeeHourlyRate}
+					</li>
+				</ul>
+					
+				<div className="btn-group pull-right">
 					<button className="btn btn-warning">
 						<span className="glyphicon glyphicon-pencil"></span> Edit
 					</button>
@@ -26,9 +42,8 @@ export default class EmployeeSingle extends Component {
 						onClick={this.deleteEmployee.bind(this)}>
 						<span className="glyphicon glyphicon-trash"></span> Delete
 					</button>
-					</div>
-				</td>
-			</tr>
+				</div>
+			</div>
 		)
 	}
 }

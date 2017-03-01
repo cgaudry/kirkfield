@@ -2,37 +2,25 @@ import { Meteor } from 'meteor/meteor';
 
 Meteor.startup(() => {
   if(Employees.find().count() === 0) {
-  	Employees.insert({
-		employeeId: 1,
-		employeeName: 'Ted'
-	});
-
-	Employees.insert({
-		employeeId: 2,
-		employeeName: 'Eddie'
-	});
-
-	Employees.insert({
-		employeeId: 3,
-		employeeName: 'Bill'
-	});
-
-	Employees.insert({
-		employeeId: 4,
-		employeeName: 'John'
-	});
 	
-
-	Employees.insert({
-		employeeId: 5,
-		employeeName: 'Tomas'
-	});
+	let yearRandom = Math.floor((Math.random() * 17) + 2000)
+	let monthRandom = Math.floor(Math.random() * 12);
+	let dayRandom = Math.floor((Math.random() * 32) + 1);
+	let firstNameArray = ['Ted', 'Eddie', 'Bill', 'John', 'Tomas', 'Bobby'];
+	let lastNameArray = ['Johnson', 'Adams', 'Martinez', 'Smith', 'Jones', 'Taylor'];
 	
-
-	Employees.insert({
-		employeeId: 6,
-		employeeName: 'Bobby'
-	});
+	for (i = 0; i < firstNameArray.length; ++i) {
+		Employees.insert({
+			employeeId: i + 1,
+			employeeFirstName: firstNameArray[i],
+			employeeLastName: lastNameArray[i],
+			employeeStartDate: new Date(yearRandom, monthRandom, dayRandom),
+			employeeExperience: (2017 - yearRandom) + Math.floor((Math.random() * 20)),
+			employeeHourlyRate: Math.floor((Math.random() * 3)  * 5) + 15,
+			createdAt: new Date()
+		});
+	}
+	
 	}
 
 	if(Jobs.find().count() === 0) {
@@ -67,6 +55,34 @@ Meteor.startup(() => {
 				vehicleId: vehicleIdArray[vehicleIdRandom],
 				mileage: milageRandom,
 				complete: false,
+				createdAt: new Date()
+				
+			});
+
+		}
+
+		
+	}
+
+	if(Inventory.find().count() === 0) {
+		let itemTypeArray = ['a', 'b', 'c'];
+
+		for (i = 1; i < 1000; i++) {
+			let itemTypeRandom = Math.floor(Math.random() * 3);
+			let quantityRandom = Math.floor(Math.random() * 50);
+			let modelNumRandom = parseFloat(parseFloat(Math.random() * 10000).toFixed(2));
+			let serialNumRandom = parseFloat(parseFloat(Math.random() * 10000).toFixed(2));
+			let costRandom = parseFloat(parseFloat(Math.random() * 100).toFixed(2) + 50);
+
+			Inventory.insert({
+				inventoryItemId: i,
+				inventoryItemName: 'Placeholder Item',
+				inventoryItemQuantity: quantityRandom,
+				make: 'Plaecholder Make',
+				model: modelNumRandom,
+				serialNum: serialNumRandom,
+				itemTypeCode: itemTypeArray[itemTypeRandom],
+				unitPrice: costRandom,
 				createdAt: new Date()
 				
 			});

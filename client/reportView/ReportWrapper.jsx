@@ -3,7 +3,8 @@ import ReactDOM from 'react-dom';
 import TrackerReact from 'meteor/ultimatejs:tracker-react';
 
 import TestReport from './reportTypes/TestReport';
-
+import ReportA from './reportTypes/ReportA';
+import JobsByEmployee from './reportTypes/JobsByEmployee.jsx';
 
 
 
@@ -16,7 +17,8 @@ export default class ReportWrapper extends TrackerReact(React.Component) {
 		this.state = {
 			value: '',
 			subscription: {
-				jobs: Meteor.subscribe("allJobs")
+				jobs: Meteor.subscribe("allJobs"),
+				employees: Meteor.subscribe("allEmployees")
 			}
 		};
 		
@@ -46,7 +48,10 @@ export default class ReportWrapper extends TrackerReact(React.Component) {
 
 		if(reportType == 'TestReport')
 			return(<TestReport />)
-		
+		if(reportType == 'ReportA')
+			return(<ReportA />)
+		if(reportType == 'JobsByEmployee')
+			return(<JobsByEmployee/>)
 		
 	}
 
@@ -61,8 +66,9 @@ export default class ReportWrapper extends TrackerReact(React.Component) {
 						Chose report:
 						<select value={this.state.value} onChange={this.handleChange}>
 							<option value=""> </option>
+							<option value="ReportA">Report A</option>
 							<option value="TestReport">Test Report</option>
-							<option value="report2">Report 2</option>
+							<option value="JobsByEmployee">Jobs By Employee</option>
 							<option value="report3">Report 3</option>
 						</select>
 					</label>	

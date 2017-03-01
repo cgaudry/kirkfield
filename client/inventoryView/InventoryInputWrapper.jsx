@@ -3,12 +3,11 @@ import ReactDOM from 'react-dom';
 import TrackerReact from 'meteor/ultimatejs:tracker-react';
 import GetContainerDimensions from 'react-dimensions'
 
-import {Table, Column, Cell} from 'fixed-data-table';
 import InventoryForm from './InventoryForm.jsx';
 import InventorySingle from './InventorySingle.jsx';
 import DataTable from './../DataTable.jsx';
 
-Inventory = new Mongo.Collection("inventory");
+export const Inventory = new Mongo.Collection("inventory");
 
 export default class InventoryInputWrapper extends TrackerReact(React.Component) {
 	constructor() {

@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
-
 export default class VehicleForm extends Component {
+
 
 	addVehicle(event) {
 		event.preventDefault();
@@ -10,10 +10,23 @@ export default class VehicleForm extends Component {
 		let vehicleModel = this.refs.vehicleModel.value.trim();
 		let vehicleModelYear = this.refs.vehicleModelYear.value.trim();
 		let licensePlate = this.refs.licensePlate.value.trim();
+<<<<<<< HEAD
 		let color = this.refs.vehicleColor.value.trim();
 		let initialMileage = this.refs.initialMileage.value.trim();
+=======
+		let validInput = true;
+>>>>>>> refs/remotes/origin/master
 		//add further input validation rules here
 		if(vehicleId) {
+			if (!parseInt(vehicleId)) {
+				Bert.alert('id must be a number', 'danger', 'fixed-top', 'fa-frown-o');
+				validInput = false;
+			}
+			if (vehicleModelYear < 0) {
+				Bert.alert('year can\'t be negative', 'danger', 'fixed-top', 'fa-frown-o');
+				validInput = false;
+			}
+		if (validInput) {
 			Meteor.call('addVehicle', vehicleId, vehicleName, vehicleMake,
 				vehicleModel, vehicleModelYear, licensePlate, color, initialMileage, (error, data) => {
 			if(error) {
@@ -24,12 +37,16 @@ export default class VehicleForm extends Component {
 			this.refs.vehicleMake.value = "";
 			this.refs.vehicleModel.value = "";
 			this.refs.vehicleModelYear.value = "";
+<<<<<<< HEAD
 			this.refs.licensePlate = "";
 			this.refs.color = "";
 			this.refs.initialMileage = 50000;
+=======
+			this.refs.licensePlate.value = "";
+>>>>>>> refs/remotes/origin/master
 			}
 		});
-		}
+		}}
 	}
 	
 	render() {
