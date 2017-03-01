@@ -29,9 +29,13 @@ export default class JobForm extends Component {
 	}
 	
 	addInstallItem() {
+
+		/*itemList += item._id + ",";
+		console.log(itemList);	*/
 		this.setState(function(prevState, props) {
 			let newInstallItems = prevState.installItems
 			newInstallItems.push({key: newInstallItems.length});
+			//console.log(newInstallItems[0].value);
 			return {
 				installItems: newInstallItems
 			};
@@ -56,6 +60,11 @@ export default class JobForm extends Component {
 		let installEmployee = this.refs.installEmployee.value.trim();
 		let vehicleId = this.refs.vehicleId.value.trim();
 		let mileage = this.refs.mileage.value.trim();
+		for(int i=0;i<this.state.installItems.length;i++;) {			
+			console.log(this.refs.installItem + i.value);
+		}
+		console.log("installItems state length: " + this.state.installItems.length);
+		console.log(this.refs.installItem1.value);
 		
 
 		//add further input validation rules here
@@ -289,12 +298,14 @@ export default class JobForm extends Component {
 					{this.state.installItems.map( (installItem) => {
 					
 						let formElementId = 'installItem' + installItem.key;
-						
+						//console.log(this.refs.formElementId);
+						//console.log("INSTALLITEMKEY: " + document.getElementById(formElementId + 'name'));
 						return 	<div className="form-group" key={formElementId}>
 									<label className="control-label col-sm-2" htmlFor={formElementId + 'name'}>Install Item:</label>
 									<div className="col-sm-2">
 										<input 
 											list={formElementId + 'name'}
+											ref={formElementId}
 											className="form-control"
 											placeholder="Install Item"
 										/>
@@ -302,7 +313,7 @@ export default class JobForm extends Component {
 											{this.inventoryItems().map( (item) => {
 												return <option
 															key={item._id}
-															value={item.inventoryItemName}/>
+															value={item.inventoryItemName + "-#" + item.inventoryItemId} />
 											})}
 										</datalist>
 									</div>
@@ -318,7 +329,7 @@ export default class JobForm extends Component {
 											className="form-control"
 											id={formElementId + 'quantity'}
 											ref={formElementId + 'quantity'}
-											placeholder="Install Item Quantity"
+											defaultValue='1'
 										/>
 									</div>
 								</div>
