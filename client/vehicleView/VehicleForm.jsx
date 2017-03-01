@@ -10,12 +10,10 @@ export default class VehicleForm extends Component {
 		let vehicleModel = this.refs.vehicleModel.value.trim();
 		let vehicleModelYear = this.refs.vehicleModelYear.value.trim();
 		let licensePlate = this.refs.licensePlate.value.trim();
-<<<<<<< HEAD
 		let color = this.refs.vehicleColor.value.trim();
 		let initialMileage = this.refs.initialMileage.value.trim();
-=======
 		let validInput = true;
->>>>>>> refs/remotes/origin/master
+		
 		//add further input validation rules here
 		if(vehicleId) {
 			if (!parseInt(vehicleId)) {
@@ -37,13 +35,10 @@ export default class VehicleForm extends Component {
 			this.refs.vehicleMake.value = "";
 			this.refs.vehicleModel.value = "";
 			this.refs.vehicleModelYear.value = "";
-<<<<<<< HEAD
 			this.refs.licensePlate = "";
 			this.refs.color = "";
 			this.refs.initialMileage = 50000;
-=======
 			this.refs.licensePlate.value = "";
->>>>>>> refs/remotes/origin/master
 			}
 		});
 		}}

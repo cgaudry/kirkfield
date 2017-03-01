@@ -118,7 +118,6 @@ Meteor.methods({
 			initialMileage: initialMileage,
 			createdAt: new Date(),
 			user: Meteor.userId()
-			//add model year, license plate, color, w/e
 		})
 	},
 	
