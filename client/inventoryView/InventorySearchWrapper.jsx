@@ -4,8 +4,8 @@ import TrackerReact from 'meteor/ultimatejs:tracker-react';
 
 import InventoryForm from './InventoryForm.jsx';
 import InventorySingle from './InventorySingle.jsx';
-
-
+import {Inventory} from './InventoryInputWrapper.jsx';
+import DataTable from './../DataTable.jsx';
 
 
 
@@ -53,14 +53,15 @@ export default class InventorySearchWrapper extends TrackerReact(React.Component
 	
 
 	render() {
-		
+		let tableRowHeight = 50;
 		return(
-			<div>
+			<div className="row">
 				<div className="panel panel-primary">
 				<div className="panel-heading">
 					<h1>Search Inventory Items</h1>
 				</div>
 				<div className="panel-body">
+				
 				<form 
 				className="form-horizontal" 
 				onSubmit={this.updateState.bind(this)}>
@@ -79,23 +80,16 @@ export default class InventorySearchWrapper extends TrackerReact(React.Component
 					</div>
 					<input type="submit" className="btn btn-primary pull-right"/>
 				</form>
-				</div>
 				
 				<h4>Search Results</h4>
-				<table className="table">
-					<thead>
-						<tr>
-							<td>Item Id</td>
-							<td>Item Name</td>
-							<td>Item Quantity</td>
-						</tr>
-					</thead>
-					<tbody>
-					{this.inventoryItems().map( (inventoryItems) => {
-						return <InventorySingle key={inventoryItems._id} inventoryItem={inventoryItems} />
-					})}
-					</tbody>
-				</table>
+				<DataTable 
+						rowHeight={tableRowHeight}
+						columns={['inventoryItemId', 'inventoryItemName', 'inventoryItemQuantity']}
+						columnNames={['Item Id', 'Item Name', 'Quantity']}
+						data={this.inventoryItems()}
+				/>
+					
+				</div>
 				</div>
 			</div>
 

@@ -101,7 +101,8 @@ Meteor.methods({
 	},
 	
 	addVehicle(vehicleId, vehicleName, vehicleMake,
-		vehicleModel, vehicleModelYear, licensePlate) {
+		vehicleModel, vehicleModelYear, licensePlate,
+		color, initialMileage) {
 		if(!Meteor.userId()) {
 			throw new Meteor.Error('Not authorized')
 		}
@@ -113,9 +114,10 @@ Meteor.methods({
 			vehicleModel: vehicleModel,
 			vehicleModelYear: vehicleModelYear,
 			licensePlate: licensePlate,
+			color: color,
+			initialMileage: initialMileage,
 			createdAt: new Date(),
 			user: Meteor.userId()
-			//add model year, license plate, color, w/e
 		})
 	},
 	
@@ -128,14 +130,20 @@ Meteor.methods({
 		Vehicles.remove(vehicle._id)
 	},
 
-	addEmployee(employeeId, employeeName) {
+	addEmployee(employeeId, employeeFirstName, employeeLastName, 
+		employeeStartDate, employeeExperience, employeeHourlyRate) {
 		if(!Meteor.userId()) {
 			throw new Meteor.Error('Not authorized')
 		}
 
 		Employees.insert({
 			employeeId: employeeId,
-			employeeName: employeeName,
+			employeeFirstName: employeeFirstName,
+			employeeLastName: employeeLastName,
+			employeeStartDate: employeeStartDate,
+			employeeEndDate: null,
+			employeeExperience: employeeExperience,
+			employeeHourlyRate: employeeHourlyRate,
 			createdAt: new Date(),
 			user: Meteor.userId()
 		})

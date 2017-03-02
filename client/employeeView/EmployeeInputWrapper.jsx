@@ -30,7 +30,7 @@ export default class EmployeeInputWrapper extends TrackerReact(React.Component) 
 	render() {
 		
 		return(
-			<div>
+			<div className="row">
 				<div className="panel panel-primary">
 				<div className="panel-heading">
 					<h1>Add Employee</h1>
@@ -45,19 +45,28 @@ export default class EmployeeInputWrapper extends TrackerReact(React.Component) 
 					<h1>All Employees</h1>
 				</div>
 				<div className="panel-body">
-					<table className="table">
-						<thead>
-							<tr>
-								<td>Employee Id</td>
-								<td>Employee Name</td>
-							</tr>
-						</thead>
-						<tbody>
-						{this.employees().map( (employees) => {
-							return <EmployeeSingle key={employees._id} employee={employees} />
-						})}
-						</tbody>
-					</table>
+				
+					<div className="panel-group" id="employeeAccordion">
+	
+					{this.employees().map( (employees) => {
+						return <div className="panel panel-default" key={employees._id}>
+							<div className="panel-heading">
+								<h4 className="panel-title">
+									<a 	data-toggle="collapse"
+										data-parent="#employeeAccordion" 
+										href={"#collapse" + employees._id}>{employees.employeeFirstName}
+									</a>
+								</h4>
+							</div>
+							<div id={"collapse" + employees._id} className="panel-collapse collapse">
+								<div className="panel-body">
+									<EmployeeSingle key={employees._id} employee={employees} />
+								</div>
+							</div>
+						</div>
+					})}
+					
+					</div>
 				</div>
 				</div>
 			</div>

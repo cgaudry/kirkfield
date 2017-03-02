@@ -3,12 +3,11 @@ import ReactDOM from 'react-dom';
 import TrackerReact from 'meteor/ultimatejs:tracker-react';
 import GetContainerDimensions from 'react-dimensions'
 
-import {Table, Column, Cell} from 'fixed-data-table';
 import InventoryForm from './InventoryForm.jsx';
 import InventorySingle from './InventorySingle.jsx';
-import DataTable from './DataTable.jsx';
+import DataTable from './../DataTable.jsx';
 
-Inventory = new Mongo.Collection("inventory");
+export const Inventory = new Mongo.Collection("inventory");
 
 export default class InventoryInputWrapper extends TrackerReact(React.Component) {
 	constructor() {
@@ -28,7 +27,7 @@ export default class InventoryInputWrapper extends TrackerReact(React.Component)
 	inventoryItems() {
 		return Inventory.find().fetch();
 	}
-
+	
 	recent() {
 		return Inventory.find();
 	}
@@ -37,7 +36,7 @@ export default class InventoryInputWrapper extends TrackerReact(React.Component)
 		this.state.recent = this.inventoryItems();
 		let tableRowHeight = 50;
 		return(
-			<div>
+			<div className="row">
 				<div className="panel panel-primary">
 				<div className="panel-heading">
 					<h1>Add Inventory Item</h1>
@@ -56,7 +55,7 @@ export default class InventoryInputWrapper extends TrackerReact(React.Component)
 						rowHeight={tableRowHeight}
 						columns={['inventoryItemId', 'inventoryItemName', 'inventoryItemQuantity']}
 						columnNames={['Item Id', 'Item Name', 'Quantity']}
-						recent={this.state.recent}
+						data={this.state.recent}
 					/>
 				</div>
 				</div>

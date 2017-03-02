@@ -2,37 +2,25 @@ import { Meteor } from 'meteor/meteor';
 
 Meteor.startup(() => {
   if(Employees.find().count() === 0) {
-  	Employees.insert({
-		employeeId: 1,
-		employeeName: 'Ted'
-	});
-
-	Employees.insert({
-		employeeId: 2,
-		employeeName: 'Eddie'
-	});
-
-	Employees.insert({
-		employeeId: 3,
-		employeeName: 'Bill'
-	});
-
-	Employees.insert({
-		employeeId: 4,
-		employeeName: 'John'
-	});
 	
-
-	Employees.insert({
-		employeeId: 5,
-		employeeName: 'Tomas'
-	});
+	let yearRandom = Math.floor((Math.random() * 17) + 2000)
+	let monthRandom = Math.floor(Math.random() * 12);
+	let dayRandom = Math.floor((Math.random() * 32) + 1);
+	let firstNameArray = ['Ted', 'Eddie', 'Bill', 'John', 'Tomas', 'Bobby'];
+	let lastNameArray = ['Johnson', 'Adams', 'Martinez', 'Smith', 'Jones', 'Taylor'];
 	
-
-	Employees.insert({
-		employeeId: 6,
-		employeeName: 'Bobby'
-	});
+	for (i = 0; i < firstNameArray.length; ++i) {
+		Employees.insert({
+			employeeId: i + 1,
+			employeeFirstName: firstNameArray[i],
+			employeeLastName: lastNameArray[i],
+			employeeStartDate: new Date(yearRandom, monthRandom, dayRandom),
+			employeeExperience: (2017 - yearRandom) + Math.floor((Math.random() * 20)),
+			employeeHourlyRate: Math.floor((Math.random() * 3)  * 5) + 15,
+			createdAt: new Date()
+		});
+	}
+	
 	}
 
 	if(Jobs.find().count() === 0) {
@@ -103,6 +91,52 @@ Meteor.startup(() => {
 
 		
 	}
+	
+	if(Vehicles.find().count() === 0) {
+		Vehicles.insert({
+			vehicleId: 1,
+			vehicleName: 'Truck 1',
+			vehicleMake: 'Ford',
+			vehicleModel: 'F150',
+			vehicleModelYear: 2010,
+			licensePlate: 'ABC123',
+			color: 'Black',
+			initialMileage: 76230,
+			createdAt: new Date()
+		});
+		Vehicles.insert({
+			vehicleId: 2,
+			vehicleName: 'Truck 2',
+			vehicleMake: 'Ford',
+			vehicleModel: 'F150',
+			vehicleModelYear: 2015,
+			licensePlate: 'ABC456',
+			color: 'Blue',
+			initialMileage: 52553,
+			createdAt: new Date()
+		});
+		Vehicles.insert({
+			vehicleId: 3,
+			vehicleName: 'Truck 3',
+			vehicleMake: 'Ford',
+			vehicleModel: 'F250',
+			vehicleModelYear: 2010,
+			licensePlate: 'XYZ123',
+			color: 'Blue',
+			initialMileage: 60439,
+			createdAt: new Date()
+		});
+		Vehicles.insert({
+			vehicleId: 4,
+			vehicleName: 'Truck 4',
+			vehicleMake: 'Toyota',
+			vehicleModel: 'Tundra',
+			vehicleModelYear: 2013,
+			licensePlate: 'XYZ456',
+			color: 'White',
+			initialMileage: 14325,
+			createdAt: new Date()
+		});
+	}
 
-  
 });
