@@ -2,11 +2,17 @@ import React from 'react';
 import AccountsUI from '../AccountsUI.jsx';
 
 export const MainLayout = ({content}) => (
+	<div>
+	
+	<div className="jumbotron">
+		<h1 className="text-center">Kirkfield Web Portal</h1>
+	</div>
+		
 	<div className="container">
 	<header>
 		<div className="row">
-		<h2>Kirkfield Web Portal</h2>
-		<nav className="navbar navbar-default">
+		
+		<nav className="navbar navbar-default text-center">
 			<div>
 				<div className="navbar-header">
 				<a className="navbar-brand" href="/">Kirkfield</a>
@@ -48,5 +54,7 @@ export const MainLayout = ({content}) => (
 			{content}
 		</div>
 	</main>
+	</div>
+	
 	</div>
 )
