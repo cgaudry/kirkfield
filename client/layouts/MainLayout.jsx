@@ -4,11 +4,12 @@ import AccountsUI from '../AccountsUI.jsx';
 export const MainLayout = ({content}) => (
 	<div className="container">
 	<header>
+		<div className="row">
 		<h2>Kirkfield Web Portal</h2>
 		<nav className="navbar navbar-default">
 			<div>
 				<div className="navbar-header">
-				<a className="navbar-brand" href="#">Kirkfield</a>
+				<a className="navbar-brand" href="/">Kirkfield</a>
 				</div>
 				<ul className="nav navbar-nav">
 					<li className="dropdown">
@@ -40,6 +41,7 @@ export const MainLayout = ({content}) => (
 				</ul>
 			</div>
 		</nav>
+		</div>
 	</header>
 	<main>
 		<div>
