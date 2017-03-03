@@ -102,9 +102,9 @@ Meteor.methods({
 			//Decrease stock quantity of job's installed items
 			for (var i=0;i<installIds.length;i++) {
 				entry = Inventory.findOne({inventoryItemId: parseInt(installIds[i])})
-				console.log(installQts[i])
+				//console.log(installQts[i])
 				let quant = installQts[i] || 1
-				console.log(quant)
+				//console.log(quant)
 				newQuantity = entry.inventoryItemQuantity - quant
 				Inventory.update(
 					{_id: entry._id},
@@ -115,7 +115,8 @@ Meteor.methods({
 	},
 	
 	addVehicle(vehicleId, vehicleName, vehicleMake,
-		vehicleModel, vehicleModelYear, licensePlate) {
+		vehicleModel, vehicleModelYear, licensePlate,
+		color, initialMileage) {
 		if(!Meteor.userId()) {
 			throw new Meteor.Error('Not authorized')
 		}
@@ -129,7 +130,6 @@ Meteor.methods({
 			licensePlate: licensePlate,
 			createdAt: new Date(),
 			user: Meteor.userId()
-			//add model year, license plate, color, w/e
 		})
 	},
 	
