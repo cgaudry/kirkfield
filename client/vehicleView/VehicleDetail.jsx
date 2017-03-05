@@ -1,45 +1,46 @@
 import React, {Component} from 'react';
 import TrackerReact from 'meteor/ultimatejs:tracker-react';
 
+import {Vehicles} from './../vehicleView/VehicleInputWrapper.jsx';
 
-export default class InventoryDetail extends TrackerReact(Component) {
+export default class VehicleDetail extends TrackerReact(Component) {
 
 	constructor() {
 		super();
 
-		this.state = {
+	this.state = {
 			subscription: {
-				inventory: Meteor.subscribe("allInventory")
+				vehicles: Meteor.subscribe("allVehicles")
 			}
 		}
 	}
 
 	componentWillUnmount() {
-		this.state.subscription.inventory.stop();
+		this.state.subscription.vehicles.stop();
 	}
 
-	inventory() {
-		return Inventory.findOne(this.props.id);
+	vehicle() {
+		return Vehicles.findOne(this.props.id);
 	}
 
 	render() {
-		let item = this.inventory();
+		let vehicle = this.vehicle();
 
-		if(!item) {
+		if(!vehicle) {
 			return(<div>Loading...</div>)
 		}
 		return(
 			<div className="panel panel-primary">
 				<div className="panel-heading">
-					<h1>Item Details: {item.inventoryItemName}</h1>
+					<h1>Vehicle Id: {vehicle.vehicleId}</h1>
 				</div>
 				<div className="panel-body">
 					<ul className="list-group">
 						<li className="list-group-item">
-							Item Id: {item.inventoryItemId}
+							Vehicle Name: {vehicle.vehicleName}
 						</li>
 						<li className="list-group-item">
-							Item Quantity: {item.inventoryItemQuantity}
+							Vehicle Make: {vehicle.vehicleMake}
 						</li>
 					</ul>
 				</div>

@@ -36,6 +36,27 @@ Meteor.methods({
 		}
 	},
 
+	editInventoryItem(inventoryItem, inventoryItemName, inventoryItemQuantity) {
+		if(!Meteor.userId()) {
+			throw new Meteor.Error('Not authorized')
+		}
+		entry = Inventory.findOne({_id: inventoryItem._id})
+		if(entry) {
+			console.log("Attempting database update...");
+			newQuantity = parseInt(inventoryItemQuantity)
+			Inventory.update(
+				{_id: entry._id},
+				{$set: {inventoryItemName: inventoryItemName}}
+				)
+			Inventory.update(
+				{_id: entry._id},
+				{$set: {inventoryItemQuantity: newQuantity}}
+				)
+		} else {
+			throw new Meteor.Error('Invalid ID')
+		}
+	},
+
 	deleteInventoryItem(inventoryItem) {
 		//can only delete items user inserted
 		//might have to change
@@ -45,32 +66,108 @@ Meteor.methods({
 		Inventory.remove(inventoryItem._id)
 	},
 
-	addJob(invoice, firstName, lastName, address, phoneNumber, email, jobTypeCode,
-			estimateCost, estimateParts, estimateEmployee, installCost, installParts, installEmployee, vehicleId, mileage) {
+	addJob(invoice, date, firstName, lastName, address, phoneNumber, email, jobTypeCode,
+			estimateCost, estimateParts, estimateEmployee, installCost, installParts, installIds, installQts, installEmployee, vehicleId, mileage) {
 		if(!Meteor.userId()) {
 			throw new Meteor.Error('Not authorized')
 		}
-		
+			let dateTokens = date.split("-");
+			let dateYear = parseInt(dateTokens[0]);
+			let dateMonth = parseInt(dateTokens[1]) - 1; //BSON month is 0 based
+			let dateDay = parseInt(dateTokens[2]);
+
 			Jobs.insert({
-				invoice: invoice,
+				invoice: parseInt(invoice),
+				date: new Date(dateYear, dateMonth, dateDay),
 				firstName: firstName,
-				lastName: parseInt(lastName),
+				lastName: lastName,
 				address: address,
 				phoneNumber: parseInt(phoneNumber),
 				email: email,
 				jobTypeCode: jobTypeCode,
-				estimateCost: parseInt(estimateCost),
+				estimateCost: parseFloat(estimateCost),
 				estimateParts: estimateParts,
-				estimateEmployee: estimateEmployee,
-				installCost: parseInt(installCost),
+				estimateEmployee: parseInt(estimateEmployee),
+				installCost: parseFloat(installCost),
 				installParts: installParts,
-				installEmployee: installEmployee,
+				installIds: installIds,
+				installQts: installQts,
+				installEmployee: parseInt(installEmployee),
 				vehicleId: vehicleId,
 				mileage: parseInt(mileage),
 				complete: false,
 				createdAt: new Date(),
 				user: Meteor.userId()
 			})
+			//Decrease stock quantity of job's installed items
+			for (var i=0;i<installIds.length;i++) {
+				entry = Inventory.findOne({inventoryItemId: parseInt(installIds[i])})
+				//console.log(installQts[i])
+				let quant = installQts[i] || 1
+				//console.log(quant)
+				newQuantity = entry.inventoryItemQuantity - quant
+				Inventory.update(
+					{_id: entry._id},
+					{$set: {inventoryItemQuantity: newQuantity}}
+					)
+			}
 		
-	}
+	},
+	
+	addVehicle(vehicleId, vehicleName, vehicleMake,
+		vehicleModel, vehicleModelYear, licensePlate,
+		color, initialMileage) {
+		if(!Meteor.userId()) {
+			throw new Meteor.Error('Not authorized')
+		}
+
+		Vehicles.insert({
+			vehicleId: vehicleId,
+			vehicleName: vehicleName,
+			vehicleMake: vehicleMake,
+			vehicleModel: vehicleModel,
+			vehicleModelYear: vehicleModelYear,
+			licensePlate: licensePlate,
+			createdAt: new Date(),
+			user: Meteor.userId()
+		})
+	},
+	
+	deleteVehicle(vehicle) {
+		//can only delete vehicles user inserted
+		//might have to change
+		if(Meteor.userId() !== vehicle.user) {
+			throw new Meteor.Error('Not authorized')
+		}
+		Vehicles.remove(vehicle._id)
+	},
+
+	addEmployee(employeeId, employeeFirstName, employeeLastName, 
+		employeeStartDate, employeeExperience, employeeHourlyRate) {
+		if(!Meteor.userId()) {
+			throw new Meteor.Error('Not authorized')
+		}
+
+		Employees.insert({
+			employeeId: employeeId,
+			employeeFirstName: employeeFirstName,
+			employeeLastName: employeeLastName,
+			employeeStartDate: employeeStartDate,
+			employeeEndDate: null,
+			employeeExperience: employeeExperience,
+			employeeHourlyRate: employeeHourlyRate,
+			createdAt: new Date(),
+			user: Meteor.userId()
+		})
+	},
+
+	deleteEmployee(employee) {
+		//can only delete vehicles user inserted
+		//might have to change
+		if(Meteor.userId() !== employee.user) {
+			throw new Meteor.Error('Not authorized')
+		}
+		Employees.remove(employee._id)
+	},
+	
 });

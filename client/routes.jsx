@@ -9,8 +9,16 @@ import InventoryDetail from './inventoryView/InventoryDetail.jsx';
 
 import JobInputWrapper from './jobView/JobInputWrapper.jsx';
 
-import HomePage from './HomePage.jsx';
+import VehicleInputWrapper from './vehicleView/VehicleInputWrapper.jsx';
+import VehiclesWrapper from './vehicleView/VehiclesWrapper.jsx';
+import VehicleDetail from './vehicleView/VehicleDetail.jsx';
 
+import ReportWrapper from './reportView/ReportWrapper.jsx';
+
+import EmployeeInputWrapper from './employeeView/EmployeeInputWrapper.jsx';
+
+
+import HomePage from './HomePage.jsx';
 
 
 FlowRouter.route('/', {
@@ -46,11 +54,53 @@ FlowRouter.route('/inventory/:id', {
 	}
 })
 
+FlowRouter.route('/vehicleInput', {
+	action() {
+		mount(MainLayout, {
+			content: (<VehicleInputWrapper />),
+		})
+	}
+})
+
+FlowRouter.route('/vehicles', {
+	action() {
+		mount(MainLayout, {
+			content: (<VehiclesWrapper />),
+		})
+	}
+})
+
+FlowRouter.route('/vehicle/:id', {
+	action(params) {
+		mount(MainLayout, {
+			//this passes params.id as a prop into RosultionDetail instance
+			content: (<VehicleDetail id={params.id} />),
+		})
+	}
+})
+
 FlowRouter.route('/reporting', {
+	action() {
+		mount(MainLayout, {
+			content: (<ReportWrapper />),
+		})
+	}
+})
+
+FlowRouter.route('/jobInput', {
 	action() {
 		mount(MainLayout, {
 			content: (<JobInputWrapper />),
 		})
 	}
 })
+
+FlowRouter.route('/employees', {
+	action() {
+		mount(MainLayout, {
+			content: (<EmployeeInputWrapper />),
+		})
+	}
+})
+
 

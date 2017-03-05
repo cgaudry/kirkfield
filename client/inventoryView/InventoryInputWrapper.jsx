@@ -1,12 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import TrackerReact from 'meteor/ultimatejs:tracker-react';
+import GetContainerDimensions from 'react-dimensions'
 
 import InventoryForm from './InventoryForm.jsx';
 import InventorySingle from './InventorySingle.jsx';
+import DataTable from './../DataTable.jsx';
 
-
-Inventory = new Mongo.Collection("inventory");
+export const Inventory = new Mongo.Collection("inventory");
 
 export default class InventoryInputWrapper extends TrackerReact(React.Component) {
 	constructor() {
@@ -15,8 +16,8 @@ export default class InventoryInputWrapper extends TrackerReact(React.Component)
 		this.state = {
 			subscription: {
 				inventory: Meteor.subscribe("allInventory")
-			}
-		}
+			},
+		};
 	}
 
 	componentWillUnmount() {
@@ -26,22 +27,39 @@ export default class InventoryInputWrapper extends TrackerReact(React.Component)
 	inventoryItems() {
 		return Inventory.find().fetch();
 	}
-
 	
-
+	recent() {
+		return Inventory.find();
+	}
+	
 	render() {
-		
+		this.state.recent = this.inventoryItems();
+		let tableRowHeight = 50;
 		return(
-			<div>
-				<h1>Add Inventory Item</h1>
-				<InventoryForm />
-				<ul className="resolutions">
-					{this.inventoryItems().map( (inventoryItems) => {
-						return <InventorySingle key={inventoryItems._id} inventoryItem={inventoryItems} />
-					})}
-				</ul>
+			<div className="row">
+				<div className="panel panel-primary">
+				<div className="panel-heading">
+					<h1>Add Inventory Item</h1>
+				</div>
+				<div className="panel-body">
+					<InventoryForm />
+				</div>
+				</div>
+				
+				<div className="panel panel-primary">
+				<div className="panel-heading">
+					<h1>Recently Added Inventory</h1>
+				</div>
+				<div className="panel-body">
+					<DataTable 
+						rowHeight={tableRowHeight}
+						columns={['inventoryItemId', 'inventoryItemName', 'inventoryItemQuantity']}
+						columnNames={['Item Id', 'Item Name', 'Quantity']}
+						data={this.state.recent}
+					/>
+				</div>
+				</div>
 			</div>
-
 		)
 	}
 }
