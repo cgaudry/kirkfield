@@ -9,7 +9,19 @@ Meteor.methods({
 		})
 	},
 
-
+	generateId(Table, idFieldName) {
+		let count = 0;
+		//console.log(Table, idFieldName);
+		return 0;
+		/*for (var i=0; i<2; i++) {
+			entry = Table.findOne({idFieldName: i})
+			console.log(entry)
+			if (!entry) {
+				return i;
+				break;
+			}
+		}*/
+	},
 
 	addInventoryItem(inventoryItemId, inventoryItemName, inventoryItemQuantity) {
 		if(!Meteor.userId()) {
@@ -71,6 +83,10 @@ Meteor.methods({
 		if(!Meteor.userId()) {
 			throw new Meteor.Error('Not authorized')
 		}
+			entry = Jobs.findOne({invoice: parseInt(invoice)})
+		if(entry) {
+			throw new Meteor.Error('Duplicate invoice')
+		}
 			let dateTokens = date.split("-");
 			let dateYear = parseInt(dateTokens[0]);
 			let dateMonth = parseInt(dateTokens[1]) - 1; //BSON month is 0 based
@@ -113,6 +129,34 @@ Meteor.methods({
 			}
 		
 	},
+
+	editJobItem(inventoryItem, inventoryItemName, inventoryItemQuantity) {
+		if(!Meteor.userId()) {
+			throw new Meteor.Error('Not authorized')
+		}
+		entry = Inventory.findOne({_id: inventoryItem._id})
+		if(entry) {
+			console.log("Attempting database update...");
+			newQuantity = parseInt(inventoryItemQuantity)
+			Inventory.update(
+				{_id: entry._id},
+				{$set: {inventoryItemName: inventoryItemName}}
+				)
+			Inventory.update(
+				{_id: entry._id},
+				{$set: {inventoryItemQuantity: newQuantity}}
+				)
+		} else {
+			throw new Meteor.Error('Invalid ID')
+		}
+	},
+	
+	deleteJobItem(job) {
+		if(!Meteor.userId()) {
+			throw new Meteor.Error('Not authorized')
+		}
+		Jobs.remove(job._id)
+	},
 	
 	addVehicle(vehicleId, vehicleName, vehicleMake,
 		vehicleModel, vehicleModelYear, licensePlate,
@@ -120,7 +164,10 @@ Meteor.methods({
 		if(!Meteor.userId()) {
 			throw new Meteor.Error('Not authorized')
 		}
-
+		entry = Vehicles.findOne({vehicleId: parseInt(vehicleId)})
+		if(entry) {
+			throw new Meteor.Error('Duplicate id')
+		}
 		Vehicles.insert({
 			vehicleId: vehicleId,
 			vehicleName: vehicleName,
@@ -146,6 +193,10 @@ Meteor.methods({
 		employeeStartDate, employeeExperience, employeeHourlyRate) {
 		if(!Meteor.userId()) {
 			throw new Meteor.Error('Not authorized')
+		}
+		entry = Employees.findOne({employeeId: parseInt(employeeId)})
+		if(entry) {
+			throw new Meteor.Error('Duplicate id')
 		}
 
 		Employees.insert({
