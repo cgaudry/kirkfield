@@ -155,7 +155,21 @@ Meteor.methods({
 		if(!Meteor.userId()) {
 			throw new Meteor.Error('Not authorized')
 		}
+		let installIds = job.installIds
+		let installQts = job.installQts
 		Jobs.remove(job._id)
+		//Restore stock quantity of the deleted job's installed items
+		for (var i=0;i<installIds.length;i++) {
+			entry = Inventory.findOne({inventoryItemId: parseInt(installIds[i])})
+			//console.log(installQts[i])
+			let quant = parseInt(installQts[i]) || 1
+			//console.log(quant)
+			newQuantity = entry.inventoryItemQuantity + quant
+			Inventory.update(
+				{_id: entry._id},
+				{$set: {inventoryItemQuantity: newQuantity}}
+				)
+		}
 	},
 	
 	addVehicle(vehicleId, vehicleName, vehicleMake,
