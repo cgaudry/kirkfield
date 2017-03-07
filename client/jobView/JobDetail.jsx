@@ -1,34 +1,83 @@
 import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
+import TrackerReact from 'meteor/ultimatejs:tracker-react';
 import {Inventory} from './../inventoryView/InventoryInputWrapper.jsx';
 import {Employees} from './../employeeView/EmployeeInputWrapper.jsx';
+import {Vehicles} from './../vehicleView/VehicleInputWrapper.jsx';
+import {Jobs} from './../jobView/JobInputWrapper.jsx';
 
-export default class JobForm extends Component {
+export default class JobDetail extends TrackerReact(Component) {
 
 	constructor() {
 		super();
 		this.state = {
 			subscription: {
 				inventory: Meteor.subscribe("allInventory"),
-				employees: Meteor.subscribe("allEmployees")
+				jobs: Meteor.subscribe("allJobs"),
+				employees: Meteor.subscribe("allEmployees"),
+				vehicles: Meteor.subscribe("allvehicles")
 			},
 			installItems: [{ key:0}]
 		};
 	}
+
+	componentDidMount() {
+		let job = this.job();
+		console.log(job);
+		let installations = job.installIds;
+		console.log("installIds: " + installations + " installQts: " + job.installQts);
+		for (var i=0;i<installations.length-1;i++) {
+			this.addInstallItem();
+		}
+		this.populateInstallItems(installations);
+	}
 	
 	componentWillUnmount() {
 		this.state.subscription.inventory.stop();
+		this.state.subscription.jobs.stop();
 		this.state.subscription.employees.stop();
 	}
 
 	inventoryItems() {
 		return Inventory.find().fetch();
 	}
+
+	job() {
+		return Jobs.findOne(this.props.id);
+	}
+
+	date() {
+		let job = this.job();
+		console.log(job.date.getFullYear() + " " + job.date.getMonth() + " " + job.date.getDate());
+		/*let dateTokens = job.date.toString().split("-");
+
+		let dateYear = parseInt(dateTokens[0]);
+		let dateMonth = parseInt(dateTokens[1]) + 1; //BSON month is 0 based
+		let dateDay = parseInt(dateTokens[2]);
+		console.log(dateYear + " " + dateMonth + " " + dateDay);*/
+		newDate = new Date(parseInt(job.date.getFullYear()), parseInt(job.date.getMonth()), parseInt(job.date.getDate()));
+		console.log(newDate);
+		return newDate.toISOString().substr(0,10);
+	}
+
+	populateInstallItems(installations) {
+		Object.keys(this.refs)
+    	.filter(key => key.substr(0,11) === 'installItem')
+    	.filter(key => key.length == 12)
+    	.forEach(key => {
+    		console.log(key.substr(11));
+         	ReactDOM.findDOMNode(this.refs[key]).value = installations[parseInt(key.substr(11))];
+        });
+	}
 	
 	employees() {
 		return Employees.find().fetch();
 	}
 	
+	vehicles() {
+		return Vehicles.find().fetch();
+	}
+
 	addInstallItem() {
 
 		/*itemList += item._id + ",";
@@ -43,7 +92,7 @@ export default class JobForm extends Component {
 		});
 	}
 	
-	addJob(event) {
+	editJob(event) {
 		event.preventDefault();
 		let invoice = this.refs.invoice.value.trim();
 		let date = this.refs.date.value.trim();
@@ -90,8 +139,8 @@ export default class JobForm extends Component {
         });
 
 		//add further input validation rules here
-		if(invoice) {
-			Meteor.call('addJob', invoice, date, firstName, lastName, address, phoneNumber, email, jobTypeCode,
+		/*if(invoice) {
+			Meteor.call('editJobItem', invoice, date, firstName, lastName, address, phoneNumber, email, jobTypeCode,
 			estimateCost, estimateParts, estimateEmployee, installCost, installParts, installIds, installQts, installEmployee, vehicleId, mileage, (error, data) => {
 			if(error) {
 				Bert.alert('Please login before submitting', 'danger', 'fixed-top', 'fa-frown-o');
@@ -120,29 +169,30 @@ export default class JobForm extends Component {
 	        });
 			}
 		});
-		}
+		}*/
 
 		
 	}
 	
 	render() {
-		let vehicles = this.props.vehicles;
+		let job = this.job();
 		//console.log(vehicles);
+		if (!job) {
+			return (<div>Loading...</div>)
+		}
 		return(
-			<form className="form-horizontal" onSubmit={this.addJob.bind(this)}>
-				<div className="form-group">
-					<label className="control-label col-sm-2" htmlFor="invoiceNumber">Invoice Number:</label>
-					<div className="col-sm-10">
-					<input 
-						type="number" 
-						className="form-control"
-						id="invoiceNumber"
-						ref="invoice"
-						placeholder="Invoice"
-					/>
-					</div>
+			<div className="row">	
+			<form method="post" action="/jobInput">				
+				<button className="btn btn-primary">
+						Back to Jobs<span className="glyphicon glyphicon-return"></span>
+				</button>
+			</form>
+			<div className="panel panel-primary">
+				<div className="panel-heading">
+					<h1>Invoice #{job.invoice}</h1>
 				</div>
-
+				<div className="panel-body">
+					<form className="form-horizontal" onSubmit={this.editJob.bind(this)}>
 				<div className="form-group">
 					<label className="control-label col-sm-2" htmlFor="invoiceNumber">Date:</label>
 					<div className="col-sm-10">
@@ -151,7 +201,7 @@ export default class JobForm extends Component {
 						className="form-control"
 						id="date"
 						ref="date"
-						placeholder="Date"
+						defaultValue={this.date()}
 					/>
 					</div>
 				</div>
@@ -166,7 +216,7 @@ export default class JobForm extends Component {
 						className="form-control"
 						id="firstName"
 						ref="firstName"
-						placeholder="First Name"
+						defaultValue={job.firstName}
 					/>
 					</div>
 				
@@ -177,7 +227,7 @@ export default class JobForm extends Component {
 						className="form-control"
 						id="lastName"
 						ref="lastName"
-						placeholder="Last Name"
+						defaultValue={job.lastName}
 					/>
 					</div>
 				</div>
@@ -190,7 +240,7 @@ export default class JobForm extends Component {
 						className="form-control"
 						id="address"
 						ref="address"
-						placeholder="Address"
+						defaultValue={job.address}
 					/>
 					</div>
 				</div>
@@ -203,7 +253,7 @@ export default class JobForm extends Component {
 						className="form-control"
 						id="phoneNumber"
 						ref="phoneNumber"
-						placeholder="Phone Number"
+						defaultValue={job.phoneNumber}
 					/>
 					</div>
 					
@@ -214,7 +264,7 @@ export default class JobForm extends Component {
 						className="form-control"
 						id="email"
 						ref="email"
-						placeholder="Email"
+						defaultValue={job.email}
 					/>
 					</div>
 				</div>
@@ -228,7 +278,7 @@ export default class JobForm extends Component {
 						className="form-control"
 						id="jobTypeCode"
 						ref="jobTypeCode"
-						placeholder="Job Type Code"
+						defaultValue={job.jobTypeCode}
 					/>
 					</div>
 				</div>
@@ -243,7 +293,7 @@ export default class JobForm extends Component {
 						className="form-control"
 						id="estimateCost"
 						ref="estimateCost"
-						placeholder="Estimate Cost"
+						defaultValue={job.estimateCost}
 					/>
 					</div>
 					
@@ -254,7 +304,7 @@ export default class JobForm extends Component {
 						className="form-control"
 						id="estimateParts"
 						ref="estimateParts"
-						placeholder="Estimate Parts"
+						defaultValue={job.estimateParts}
 					/>
 					</div>
 					
@@ -289,7 +339,7 @@ export default class JobForm extends Component {
 						className="form-control"
 						id="installCost"
 						ref="installCost"
-						placeholder="Install Cost"
+						defaultValue={job.installCost}
 					/>
 					</div>
 					
@@ -300,7 +350,7 @@ export default class JobForm extends Component {
 						className="form-control"
 						id="installParts"
 						ref="installParts"
-						placeholder="Install Parts"
+						defaultValue={job.installParts}
 					/>
 					</div>
 					
@@ -360,6 +410,8 @@ export default class JobForm extends Component {
 									</div>
 								</div>
 					})}
+
+					
 					
 					<button className="btn btn-primary"
 						type="button"
@@ -376,8 +428,9 @@ export default class JobForm extends Component {
 						className="form-control"
 						id="vehicleId"
 						ref="vehicleId"
+						defaultValue={job.vehicleId}
 					>
-						{vehicles.map( (vehicles) => {
+						{this.vehicles().map( (vehicles) => {
 							return <option 
 										key={vehicles._id} 
 										value={vehicles.vehicleName} 
@@ -396,12 +449,16 @@ export default class JobForm extends Component {
 						className="form-control"
 						id="mileage"
 						ref="mileage"
-						placeholder="Job Mileage"
+						defaultValue={job.mileage}
 					/>
 					</div>
 				</div>
-					<input type="submit" className="btn btn-primary pull-right"/>
+					<input type="submit" className="btn btn-primary pull-right" value="Save changes"/>
 				</form>
+				</div>
+			</div>
+			</div>
+			
 			)
 	}
 }
