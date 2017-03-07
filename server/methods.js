@@ -23,7 +23,7 @@ Meteor.methods({
 		}*/
 	},
 
-	addInventoryItem(inventoryItemId, inventoryItemName, inventoryItemQuantity) {
+	addInventoryItem(inventoryItemId, inventoryItemName, unitPrice, inventoryItemQuantity, make, model, serialNum) {
 		if(!Meteor.userId()) {
 			throw new Meteor.Error('Not authorized')
 		}
@@ -40,29 +40,35 @@ Meteor.methods({
 			Inventory.insert({
 				inventoryItemId: inventoryItemId,
 				inventoryItemName: inventoryItemName,
+				unitPrice: parseDouble(unitPrice),
 				inventoryItemQuantity: parseInt(inventoryItemQuantity),
-				complete: false,
+				make: make,
+				model: model,
+				serialNum: serialNum,
 				createdAt: new Date(),
 				user: Meteor.userId()
 			})
 		}
 	},
 
-	editInventoryItem(inventoryItem, inventoryItemName, inventoryItemQuantity) {
+	editInventoryItem(inventoryItem, inventoryItemName, unitPrice, inventoryItemQuantity, make, model, serialNum) {
 		if(!Meteor.userId()) {
 			throw new Meteor.Error('Not authorized')
 		}
 		entry = Inventory.findOne({_id: inventoryItem._id})
+		console.log(entry)
 		if(entry) {
 			console.log("Attempting database update...");
-			newQuantity = parseInt(inventoryItemQuantity)
 			Inventory.update(
 				{_id: entry._id},
-				{$set: {inventoryItemName: inventoryItemName}}
-				)
-			Inventory.update(
-				{_id: entry._id},
-				{$set: {inventoryItemQuantity: newQuantity}}
+				{$set: {
+					inventoryItemName: inventoryItemName,
+					unitPrice: unitPrice,
+					inventoryItemQuantity: inventoryItemQuantity,
+					make: make,
+					model: model,
+					serialNum: serialNum
+				}}
 				)
 		} else {
 			throw new Meteor.Error('Invalid ID')
@@ -189,6 +195,8 @@ Meteor.methods({
 			vehicleModel: vehicleModel,
 			vehicleModelYear: vehicleModelYear,
 			licensePlate: licensePlate,
+			color: color,
+			initialMileage: initialMileage,
 			createdAt: new Date(),
 			user: Meteor.userId()
 		})
