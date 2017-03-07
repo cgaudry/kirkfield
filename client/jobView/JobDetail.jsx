@@ -48,7 +48,7 @@ export default class JobDetail extends TrackerReact(Component) {
 
 	date() {
 		let job = this.job();
-		//console.log(job.date.getFullYear() + " " + job.date.getMonth() + " " + job.date.getDate());
+		console.log(job.date.getFullYear() + " " + job.date.getMonth() + " " + job.date.getDate());
 		/*let dateTokens = job.date.toString().split("-");
 
 		let dateYear = parseInt(dateTokens[0]);
@@ -56,8 +56,8 @@ export default class JobDetail extends TrackerReact(Component) {
 		let dateDay = parseInt(dateTokens[2]);
 		console.log(dateYear + " " + dateMonth + " " + dateDay);*/
 		newDate = new Date(parseInt(job.date.getFullYear()), parseInt(job.date.getMonth()), parseInt(job.date.getDate()));
-		//console.log(newDate);
-		return newDate;
+		console.log(newDate);
+		return newDate.toISOString().substr(0,10);
 	}
 
 	populateInstallItems(installations) {
